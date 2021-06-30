@@ -1,0 +1,46 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+    {
+        Layout = (string)parentLayout;
+    }
+    else
+    {
+        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+    }
+}
+
+
+<!--================ Start Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>Manage your account</h2>
+                <div class="page_link">
+                    <a asp-area="" asp-page="/Index">Home</a>
+                    <a asp-page="/Identity/Areas/Manage">Profile</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ End Banner Area =================-->
+<!--================ Start Manage Area =================-->
+<section class="about_area section_gap">
+    <div class="container">
+        <div class="row justify-content-start align-items-center">
+            <div class="col-lg-8 mx-auto">
+                <div class="main_title text-center">
+                    <p class="top_text">Change your account settings <span></span></p>
+                    <br />
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ End Manage Area =================-->
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

@@ -1,0 +1,101 @@
+﻿@page
+@model Sh.Web.Pages.Portfolio.DeleteModel
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = "Delete";
+}
+
+@section CSS{
+    <link rel="stylesheet" href="~/css/portfolio_style.css" />
+}
+<!--================ Start Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>@Localizer["Dlete this Project"]"</h2>
+                <div class="page_link">
+                    <a asp-area="" asp-page="/Index">@Localizer["Home"]</a>
+                    <a asp-page="/Portfolio/List">@Localizer["Portfolio"]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ End Banner Area =================-->
+<!--================Portfolio Area =================-->
+<section class="portfolio_area section-margin pb-0">
+    <div class="container">
+        <div class="row">
+            <h2>@Localizer["Are you sure you want to delete this Project?"]</h2>
+            <dl class="row mt-50">
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Project.Slug)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Project.Slug)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Project.CoverPhotoPath)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Project.CoverPhotoPath)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Project.PostedDate)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Project.PostedDate)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Project.Title)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Project.Title)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Project.TitleRu)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Project.TitleRu)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Project.TitleUz)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Project.TitleUz)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Project.Content)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Project.Content)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Project.ContentRu)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Project.ContentRu)
+                </dd>
+                <dt class="col-sm-3">
+                    @Html.DisplayNameFor(model => model.Project.ContentUz)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Project.ContentUz)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Project.ViewCount)
+                </dt>
+                <dd class="col-sm-9">
+                    @Html.DisplayFor(model => model.Project.ViewCount)
+                </dd>
+            </dl>
+
+            <form method="post">
+                <input type="hidden" asp-for="Project.Id" />
+                <button type="submit" class="primary_btn button-contactForm">@Localizer["Delete"]</button>
+            </form>
+        </div>
+    </div>
+</section>
+<!--================Portfolio Area =================-->

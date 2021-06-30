@@ -1,0 +1,158 @@
+﻿@page
+@model Sh.Web.Pages.Blog.CreateModel
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = "Create";
+}
+
+@section CSS {
+    <script src="https://cdn.tiny.cloud/1/gor58flziaueg8chsw70ufwp3mnxgqytjn0hgvh6agc8q65x/tinymce/5/tinymce.min.js"
+            referrerpolicy="origin"></script>
+    <link rel="stylesheet" href="~/css/blog_style.css" />
+}
+
+<!--================ Start Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>@Localizer["Create new Article"]"</h2>
+                <div class="page_link">
+                    <a asp-area="" asp-page="/Index">@Localizer["Home"]</a>
+                    <a asp-page="/Blog/List">@Localizer["Blog"]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ End Banner Area =================-->
+
+<!--================Blog Area =================-->
+<section class="blog_area section-margin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mb-5 mb-lg-0 mx-auto">
+                <div class="blog_left_sidebar">
+
+                    <form method="post" enctype="multipart/form-data">
+                        <!-- photo input start -->
+                        <div id="uploadBtn" class="col-12 p-0">
+                            <a class="primary_btn rounded-0 primary-bg text-white mb-30 file-btn">
+                                <span>@Localizer["Choose an image"]</span>
+                                <input id="uploadInput" type="file" asp-for="Input.UploadCoverPhoto" onchange="readURL(this);" value="Choose a file" accept="image/*" />
+                            </a>
+                        </div>
+
+                        <div id="removeBtn" class="mb-20 col-12 p-0">
+                            <button type="button" class="primary_btn button-contactForm" onclick="removeUpload()">@Localizer["Delete"] <span id="img -text"></span></button>
+                        </div>
+
+                        <div id="post-thumbnils" class="mb-30 col-lg-5 p-0" style="display: none;">
+                            <img id="uploadedImg" class="card-img" src="" alt="">
+                        </div>
+                        <!-- photo input end -->
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Input.Blog.Title" class="control-label"></label>
+                            <input asp-for="Input.Blog.Title" class="form-control" />
+                            <span asp-validation-for="Input.Blog.Title" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Blog.TitleRu" class="control-label"></label>
+                            <input asp-for="Input.Blog.TitleRu" class="form-control" />
+                            <span asp-validation-for="Input.Blog.TitleRu" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Blog.TitleUz" class="control-label"></label>
+                            <input asp-for="Input.Blog.TitleUz" class="form-control" />
+                            <span asp-validation-for="Input.Blog.TitleUz" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Blog.Content" class="control-label"></label>
+                            <textarea asp-for="Input.Blog.Content" class="form-control"></textarea>
+                            <span asp-validation-for="Input.Blog.Content" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Blog.ContentRu" class="control-label"></label>
+                            <textarea asp-for="Input.Blog.ContentRu" class="form-control"></textarea>
+                            <span asp-validation-for="Input.Blog.ContentRu" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Input.Blog.ContentUz" class="control-label"></label>
+                            <textarea asp-for="Input.Blog.ContentUz" class="form-control"></textarea>
+                            <span asp-validation-for="Input.Blog.ContentUz" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-20">
+                            <label class="font-weight-light">&nbsp;(<span class="font-weight-bold text-danger">*</span>@Localizer["Do not duplicate tag names"])</label>
+                            <input asp-for="Input.Tags" class="form-control" />
+                            <span asp-validation-for="Input.Tags" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-lg-5">
+                            <button type="submit" class="primary_btn button-contactForm">@Localizer["Create"]</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Blog Area =================-->
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+        $(document).ready(function () {
+            document.getElementById("removeBtn").style.display = "none";
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#uploadBtn').hide();
+                    $('#media-path').hide();
+                    $('#uploadedImg').attr('src', e.target.result);
+                    $('#post-thumbnils').show();
+                    $('#removeBtn').show();
+                    $('#img-text').html(input.files[0].name);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+
+            } else {
+                removeUpload();
+            }
+        }
+
+        function removeUpload() {
+            $('#uploadInput').replaceWith($('#uploadInput').clone());
+            $('#removeBtn').hide();
+            $('#post-thumbnils').hide();
+            $('#uploadBtn').show();
+            $('#media-path').show();
+        }
+
+        function initMCEall() {
+            tinyMCE.init({
+                mode: "textareas",
+                plugins: [
+                    'advlist autolink link image lists charmap print preview hr anchor pagebreak',
+                    'searchreplace wordcount visualblocks code fullscreen insertdatetime media nonbreaking',
+                    'table emoticons template paste help'
+                ],
+                toolbar: 'undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | ' +
+                    'bullist numlist outdent indent | link image | ' +
+                    'forecolor backcolor emoticons | help',
+                menu: {
+                    favs: { title: 'My Favorites', items: 'code visualaid | searchreplace | emoticons' }
+                },
+                menubar: 'favs file edit view insert format tools table help',
+                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+            });
+        }
+        initMCEall();
+    </script>
+}

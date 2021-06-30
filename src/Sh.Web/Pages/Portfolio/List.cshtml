@@ -1,0 +1,197 @@
+﻿@page
+@using Domain.Entities.BlogModel
+@using Microsoft.AspNetCore.Antiforgery
+@model Sh.Web.Pages.Portfolio.ListModel
+@inject IViewLocalizer Localizer
+@inject IAntiforgery antiforgery
+@{
+    var token = antiforgery.GetAndStoreTokens(HttpContext).RequestToken;
+}
+@{
+    ViewData["Title"] = "Portfolio";
+}
+@section CSS{
+    <link rel="stylesheet" href="~/css/portfolio_style.css" />
+}
+
+<!--================ Start Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>@Localizer["Portfolio"]</h2>
+                <div class="page_link">
+                    <a asp-area="" asp-page="/Index">@Localizer["Home"]</a>
+                    <a asp-page="/Portfolio/List">@Localizer["Contacts"]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ End Banner Area =================-->
+<!--================ Start Portfolio Area =================-->
+<section class="portfolio_area section-margin pb-0" id="portfolio">
+    <div class="container">
+        @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
+        {
+            <ul class="action_list">
+                <li>
+                    <a asp-page="/Portfolio/Create" class="action_btn rounded-0 primary-bg text-white w-100 mb-30"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;@Localizer["Add new Media"]</a>
+                </li>
+            </ul>
+        }
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main_title">
+                    <p class="top_text">@Localizer["My Portfolio"] <span></span></p>
+                    @if (!Model.Projects.Any())
+                    {
+                        <h2>@Localizer["Empty"] :D</h2>
+                    }
+                    else
+                    {
+                        <h2>@Localizer["Check My Recent Works"]</h2>
+                    }
+                </div>
+            </div>
+        </div>
+        @if (Model.Projects.Any())
+        {
+            <div class="filters-content">
+                <div id="prjct_container" class="row portfolio-grid">
+                    <div class="grid-sizer col-md-6 col-lg-6"></div>
+
+                    @foreach (var project in Model.Projects)
+                    {
+                        <div class="col-lg-6 col-md-6 all">
+                            <a asp-page="/Portfolio/Index" asp-route-slug="@project.Slug">
+                                <div class="single_portfolio">
+                                    <img class="img-fluid w-100" src="@project.CoverPhotoPath" alt="@project.Title">
+                                    <div class="overlay"></div>
+                                    <div class="short_info">
+                                        <h4>
+                                            @switch (Model.RCName.ToLower())
+                                            {
+                                                case "ru":
+                                                    @project.TitleRu
+                                                    break;
+                                                case "uz":
+                                                    @project.TitleUz
+                                                    break;
+                                                default:
+                                                    @project.Title
+                                                    break;
+                                            }
+                                        </h4>
+                                        <p>@Tag.ConvertTagsToString(project.Tags, ' ')</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+
+                </div>
+            </div>
+
+            <div class=" col-lg-4 col-md-6 mx-auto mt-lg-60">
+                <a onclick="GetMedia()" class="primary_btn rounded-0 primary-bg text-white w-100">@Localizer["Load More"]</a>
+            </div>
+        }
+
+    </div>
+    <input id="amount_prjct" type="hidden" value="@ViewData["Amount"]" />
+</section>
+<!--================ End Portfolio Area =================-->
+
+@section Scripts {
+    <script src="~/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+    <script src="~/vendors/isotope/isotope-min.js"></script>
+    <script>
+        var culture = @Model.RCName.ToLower();
+        /* ---------------------------------------------
+            Isotope js Starts
+         --------------------------------------------- */
+        $(window).on('load', function () {
+
+            if (document.getElementById('portfolio')) {
+                $('.portfolio-grid').isotope({
+                    itemSelector: '.all',
+                    percentPosition: true,
+                    masonry: {
+                        columnWidth: '.grid-sizer'
+                    }
+                });
+            }
+        });
+
+        function GetMedia() {
+            var amount = parseInt($("#amount_prjct").val());
+            $.ajax({
+                type: "POST",
+                url: "/ru/Portfolio?handler=Project",
+                data: { amount: amount },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN", '@token');
+                },
+                success: function (result) {
+                    console.log(result.length);
+                    $("#amount_prjct").val(function () {
+                        return parseInt(this.value) + result.length;
+                    });
+
+                    for (let i = 0; i < result.length; i++) {
+                        var $newItem;
+                        var tags = [];
+                        for (var z = 0; z < result[i].tags.length; z++) {
+                            tags.push(" " + result[i].tags[z].name);
+                        }
+                        if (culture === "ru") {
+                            $newItem = $(`<div class="col-lg-6 col-md-6 all">
+                                            <a href="/ru/Portfolio?handler=${result[i].Slug}">
+                                                <div class="single_portfolio">
+                                                    <img class="img-fluid w-100" src="${result[i].CoverPhotoPath}" alt="${result[i].Title}">
+                                                    <div class="overlay"></div>
+                                                    <div class="short_info">
+                                                        <h4>${result[i].TitleRu}</h4>
+                                                        <p>${tags}</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>`);
+                        }
+                        else if (culture === "uz") {
+                            $newItem = $(`<div class="col-lg-6 col-md-6 all">
+                                            <a href="/uz/Portfolio?handler=${result[i].Slug}">
+                                                <div class="single_portfolio">
+                                                    <img class="img-fluid w-100" src="${result[i].CoverPhotoPath}" alt="${result[i].Title}">
+                                                    <div class="overlay"></div>
+                                                    <div class="short_info">
+                                                        <h4>${result[i].TitleUz}</h4>
+                                                        <p>${tags}</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>`);
+                        }
+                        else {
+                            $newItem = $(`<div class="col-lg-6 col-md-6 all">
+                                            <a href="/en/Portfolio?handler=${result[i].Slug}">
+                                                <div class="single_portfolio">
+                                                    <img class="img-fluid w-100" src="${result[i].CoverPhotoPath}" alt="${result[i].Title}">
+                                                    <div class="overlay"></div>
+                                                    <div class="short_info">
+                                                        <h4>${result[i].Title}</h4>
+                                                        <p>${tags}</p>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>`);
+
+                        }
+                        $('.gallery-grid').isotope('insert', $newItem);
+                    }
+                }
+            });
+        }
+    </script>
+}

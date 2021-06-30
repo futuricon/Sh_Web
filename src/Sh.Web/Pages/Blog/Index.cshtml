@@ -1,0 +1,162 @@
+﻿@page "{slug}"
+@using Domain.Entities.BlogModel
+@model Sh.Web.Pages.Blog.IndexModel
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section CSS{ 
+    <link rel="stylesheet" href="~/css/blog_style.css" />
+}
+
+<!--================ Start Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>@ViewData["BlogTitle"]</h2>
+                <div class="page_link">
+                    <a asp-area="" asp-page="/Index">@Localizer["Home"]</a>
+                    <a asp-page="/Blog/List">@Localizer["Blog"]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ End Banner Area =================-->
+<!--================Blog Area =================-->
+<section class="blog_area single-post-area section-margin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 posts-list">
+                @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
+                {
+                    <ul class="action_list mb-15">
+                        <li>
+                            <a class="action_btn rounded-0 primary-bg text-white mb-15" asp-page="/Blog/Edit" asp-route-id="@Model.Blog.Id"><i class="fas fa-pen"></i>&nbsp;&nbsp;@Localizer["Edit this Article"]</a>
+                        </li>
+                        <li>
+                            <a class="action_btn rounded-0 primary-bg text-white mb-15" asp-page="/Blog/Delete" asp-route-id="@Model.Blog.Id"><i class="fas fa-trash"></i>&nbsp;&nbsp;@Localizer["Delete this Article"]</a>
+                        </li>
+                    </ul>
+                }
+                <div class="single-post">
+                    <div class="feature-img">
+                        @if (!string.IsNullOrEmpty(Model.Blog.CoverPhotoPath))
+                        {
+                            <img class="img-fluid" src="@Model.Blog.CoverPhotoPath" alt="@Model.Blog.Title">
+                        }
+                        else
+                        {
+                            <img class="img-fluid" src="~/img/blog_image.png" alt="Blog Cover Image">
+                        }
+                    </div>
+                    <div class="blog_details">
+                        <h2>@ViewData["BlogTitle"]</h2>
+                        <ul class="blog-info-link mt-3 mb-4">
+                            <li><i class="far fa-eye"></i>&nbsp;@Model.Blog.ViewCount</li>
+                            <li>
+                                <i class="fas fa-calendar"></i>
+                                @Model.Blog.PostedDate.ToString("dd MMMM, yyyy")
+                            </li>
+                        </ul>
+                        @switch (Model.RCName)
+                        {
+                            case "ru":
+                                @Html.Raw(Model.Blog.ContentRu)
+                                break;
+                            case "uz":
+                                @Html.Raw(Model.Blog.ContentUz)
+                                break;
+                            default:
+                                @Html.Raw(Model.Blog.Content)
+                                break;
+                        }
+                        <ul class="blog-info-link mt-3 mb-4">
+                            <li>
+                                <i class="fas fa-hashtag"></i>
+                                @Tag.ConvertTagsToString(Model.Blog.Tags, '#')
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="navigation-top">
+                    <div class="d-sm-flex justify-content-between text-center">
+                        <ul class="social-icons">
+                            <li><a id="fb-share"><i class="fab fa-facebook"></i></a></li>
+                            <li><a id="tg-share"><i class="fab fa-telegram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+
+                    <aside class="single_sidebar_widget popular_post_widget">
+                        <h3 class="widget_title">@Localizer["Popular Posts"]</h3>
+                        @foreach (var article in Model.PopularArticles)
+                        {
+                            <div class="media post_item">
+                                @if (!string.IsNullOrEmpty(article.CoverPhotoPath)) 
+                                {
+                                    <div class="post_item_img">
+                                        <img src="@article.CoverPhotoPath" alt="@article.Title">
+                                    </div>
+                                }
+                                else
+                                {
+                                    <img src="@article.CoverPhotoPath" alt="@article.Title">
+                                }
+                                <div class="media-body">
+                                    <a asp-page="/Blog/Index" asp-route-slug="@article.Slug">
+                                        @switch (Model.RCName.ToLower())
+                                        {
+                                            case "ru":
+                                                <h3>@article.TitleRu</h3>
+                                                break;
+                                            case "uz":
+                                                <h3>@article.TitleUz</h3>
+                                                break;
+                                            default:
+                                                <h3>@article.Title</h3>
+                                                break;
+                                        }
+                                    </a>
+                                    <p>@article.PostedDate.ToString("dd MMMM, yyyy")</p>
+                                </div>
+                            </div>
+                        }
+                    </aside>
+                    <aside class="single_sidebar_widget tag_cloud_widget">
+                        <h4 class="widget_title">@Localizer["Popular Tags"]</h4>
+                        <ul class="list">
+                            @foreach (var tag in Model.PopularTags)
+                            {
+                                <li>
+                                    <a asp-page="/Blog/List" asp-route-tag="@tag.Trim()">@tag</a>
+                                </li>
+                            }
+                        </ul>
+                    </aside>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Blog Area =================-->
+
+@section Scripts {
+    <script>
+        $(function () {
+            var curentUrl = window.location.href;
+            var encodedUrl = encodeURIComponent(curentUrl);
+            var fbShareUrl = "http://www.facebook.com/share.php?u=" + encodedUrl;
+            var tgShareUrl = "https://t.me/share/url?url=" + encodedUrl;
+            $('#fb-share').attr("href", fbShareUrl);
+            $('#tg-share').attr("href", tgShareUrl);
+        });
+    </script>
+}
+    

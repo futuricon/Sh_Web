@@ -1,0 +1,24 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Sh.Domain.Entities.UserModel
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <li class="nav-item submenu dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@User.Identity.Name</a>
+        <ul class="dropdown-menu">
+
+            <li class="nav-item">
+                <a class="nav-link culture-options text-center" asp-area="Identity" asp-page="/Account/Manage/Index">Account</a>
+            </li>
+
+            <li class="nav-item">
+                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Page("/Index", new { area = "" })">
+                    <button class="primary_btn rounded-0 primary-bg text-white" type="submit">Logout</button>
+                </form>
+            </li>
+
+        </ul>
+    </li>
+}

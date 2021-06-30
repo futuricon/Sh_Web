@@ -1,0 +1,62 @@
+﻿@page
+@model Sh.Web.Pages.Admin.EditModel
+@{
+    ViewData["Title"] = "Edit User";
+}
+
+<!--================ Start Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>@ViewData["Title"]</h2>
+                <div class="page_link">
+                    <a asp-area="" asp-page="/Index">Home</a>
+                    <a asp-page="/Admin/Index">Admin</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ End Banner Area =================-->
+<!--================ Start Edit Area =================-->
+<section class="about_area section_gap">
+    <div class="container">
+        <div class="row justify-content-start align-items-center">
+            <div class="col-lg-6 mx-auto">
+                <div class="main_title text-center">
+                    <p class="top_text">Edit @Model.AppUser.UserName <span></span></p>
+                    <br />
+                    <form method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="AppUser.Id" />
+                        <div class="form-group">
+                            <label asp-for="AppUser.UserName" class="control-label"></label>
+                            <input asp-for="AppUser.UserName" class="form-control" />
+                            <span asp-validation-for="AppUser.UserName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AppUser.Email" class="control-label"></label>
+                            <input asp-for="AppUser.Email" class="form-control" />
+                            <span asp-validation-for="AppUser.Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="IsAdmin"></label>
+                            <input type="checkbox" asp-for="IsAdmin" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="AppUser.IsBlocked"></label>
+                            <input type="checkbox" asp-for="AppUser.IsBlocked" class="form-control" />
+                        </div>
+                        <button type="submit" class="primary_btn button-contactForm mt-4">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ End Edit Area =================-->
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,135 @@
+﻿@{ 
+    string setClass = ViewData["PageName"] == null ? "header_inner_page" : "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @await RenderSectionAsync("Head", required: false).ConfigureAwait(false)
+    <title>@ViewData["Title"]</title>
+
+    <!-- ========================= CSS here ========================= -->
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+              crossorigin="anonymous">
+    </environment>
+    <!-- main css -->
+    <link rel="stylesheet" href="~/vendors/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="~/css/style.css">
+    @await RenderSectionAsync("CSS", required: false).ConfigureAwait(false)
+</head>
+<body>
+    <!--================ Start Header Area =================-->
+    <header class="header_area @setClass">
+        <div class="main_menu">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <a class="navbar-brand logo_h" asp-area="" asp-page="/Index"><img src="~/img/logo.png" alt=""></a>
+                    <a class="navbar-brand logo_inner_page" asp-area="" asp-page="/Index"><img src="~/img/logo2.png" alt=""></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav menu_nav">
+                            <li class="nav-item"><a is-active-page class="nav-link" asp-area="" asp-page="/Index">Home</a></li>
+                            <li class="nav-item"><a is-active-page class="nav-link" asp-area="" asp-page="/About">About</a></li>
+                            <li class="nav-item"><a is-active-page class="nav-link" asp-page="/Portfolio/List">Portfolio</a></li>
+                            <li class="nav-item"><a is-active-page class="nav-link" asp-page="/Gallery/Index">Gallery</a></li>
+                            <li class="nav-item"><a is-active-page class="nav-link" asp-page="/Blog/List">Blog</a></li>
+                            <li class="nav-item"><a is-active-page class="nav-link" asp-area="" asp-page="/Contact">Contacts</a></li>
+                            <vc:culture-switcher />
+                            <partial name="_LoginPartial" />
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!--================ End Header Area =================-->
+
+    <main role="main">
+        @RenderBody()
+    </main>
+    <partial name="_CookieConsentPartial" />
+    <!--================Footer Area =================-->
+    <footer class="footer_area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="footer_top flex-column">
+                        <div class="footer_logo">
+                            <a asp-area="" asp-page="/Index">
+                                <img src="~/img/logo2.png" alt="">
+                            </a>
+                            <div class="d-lg-block d-none">
+                                <nav class="navbar navbar-expand-lg navbar-light justify-content-center">
+                                    <div class="collapse navbar-collapse offset">
+                                        <ul class="nav navbar-nav menu_nav mx-auto">
+                                            <li class="nav-item"><a class="nav-link text-white" asp-page="/Index">Home</a></li>
+                                            <li class="nav-item"><a class="nav-link text-white" asp-page="/About">About</a></li>
+                                            <li class="nav-item"><a class="nav-link text-white" asp-page="/Portfolio/List">Portfolio</a></li>
+                                            <li class="nav-item"><a class="nav-link text-white" asp-page="/BLog/List">BLog</a></li>
+                                            <li class="nav-item"><a class="nav-link text-white" asp-page="/Gellery/Index">Gellery</a></li>
+                                            <li class="nav-item"><a class="nav-link text-white" asp-page="/Contact">Contacts</a></li>
+                                            <li class="nav-item"><a class="nav-link text-white" asp-page="/Privacy">Privacy</a></li>
+                                        </ul>
+                                    </div>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="footer_social mt-lg-0 mt-4">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                            <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row footer_bottom justify-content-center">
+                <p class="col-lg-8 col-sm-12 footer-text">
+                    <!-- Link -->
+                    Copyright &copy;
+                    <script>
+                        document.write(new Date().getFullYear());
+                    </script> All rights reserved | By <a class="glitchy" data-text="Futuricon" href="https://t.me/Futuricon" target="_blank">Futuricon</a>
+                    <!-- Link -->
+                </p>
+            </div>
+        </div>
+    </footer>
+    <!--================End Footer Area =================-->
+    <!-- ========================= JS here ========================= -->
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+                integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
+                crossorigin="anonymous"
+                referrerpolicy="no-referrer">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous">
+        </script>
+    </environment>
+
+    <script src="~/js/theme.js"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

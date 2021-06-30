@@ -1,0 +1,140 @@
+﻿@page
+@using Domain.Entities.GalleryModel
+@model Sh.Web.Pages.Gallery.ListModel
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = "Gallery";
+}
+
+@section CSS {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css">
+    <link rel="stylesheet" href="~/css/gallery_style.css">
+}
+
+<!--================ Start Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>@Localizer["Gallery"]</h2>
+                <div class="page_link">
+                    <a asp-area="" asp-page="/Index">@Localizer["Home"]</a>
+                    <a asp-page="/Gallery/Index">@Localizer["Gallery"]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ End Banner Area =================-->
+<!--================ Start Gellery Area =================-->
+<section class="gallery_area section-margin pb-0">
+    <div class="container">
+        <a asp-page="/Gallery/Create" class="action_btn rounded-0 primary-bg text-white mb-30"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;@Localizer["Add new Media"]</a>
+        @if (!Model.Medias.Any())
+        {
+            <h2>@Localizer["Empty"] :D</h2>
+        }
+        else
+        {
+            <div class="filters gallery-filter">
+                <ul>
+                    <li class="active" data-filter="*">@Localizer["all"]</li>
+                    <li data-filter=".photo"> @Localizer["photo"]</li>
+                    <li data-filter=".video"> @Localizer["video"]</li>
+                </ul>
+            </div>
+
+            <div class="filters-content">
+                <div class="row gallery-grid">
+                    <div class="grid-sizer col-md-3 col-lg-4"></div>
+
+                    @foreach (var media in Model.Medias)
+                    {
+                        @if (media.MediaType.ToString().ToLower() == "image")
+                        {
+                            <div class="col-lg-4 col-md-6 all photo">
+                                <div class="gallery_item_img">
+                                    <ul class="action_list gallery_item_act_t">
+                                        <li>
+                                            <a asp-page="/Gallery/Edit" asp-route-id="@media.Id" class="action_btn rounded-0 primary-bg text-white"><i class="fas fa-pen"></i></a>
+                                        </li>
+                                        <li>
+                                            <a asp-page="/Gallery/Delete" asp-route-id="@media.Id" class="action_btn rounded-0 primary-bg text-white"><i class="fas fa-trash"></i></a>
+                                        </li>
+                                    </ul>
+                                    <a class="glightbox" href="@media.MediaPath">
+                                        <img class="card-img rounded-0" src="@media.MediaPath" alt="">
+                                    </a>
+                                    <p class="gallery_item_act_b">
+                                        @Category.ConvertCategoriesToString(media.Categories, '#')
+                                    </p>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-lg-4 col-md-6 all video">
+                                <div class="gallery_item_img">
+                                    <ul class="action_list gallery_item_act_t">
+                                        <li>
+                                            <a asp-page="/Gallery/Edit" asp-route-id="@media.Id" class="action_btn rounded-0 primary-bg text-white"><i class="fas fa-pen"></i></a>
+                                        </li>
+                                        <li>
+                                            <a asp-page="/Gallery/Delete" asp-route-id="@media.Id" class="action_btn rounded-0 primary-bg text-white"><i class="fas fa-trash"></i></a>
+                                        </li>
+                                    </ul>
+                                    <a class="glightbox" href="https://www.youtube.com/watch?v=@media.MediaPath">
+                                        <img class="card-img rounded-0" src="https://img.youtube.com/vi/@media.MediaPath/hqdefault.jpg" alt="">
+                                    </a>
+                                    <p class="gallery_item_act_b">
+                                        @Category.ConvertCategoriesToString(media.Categories, '#')
+                                    </p>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</section>
+<!--================ End Gellery Area =================-->
+
+@section Scripts {
+    <script src="~/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+    <script src="~/vendors/isotope/isotope-min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+    <script>
+        const lightbox = GLightbox({
+            selector: '.glightbox',
+            touchNavigation: true,
+            loop: true,
+            autoplayVideos: true
+        });
+
+        /* ---------------------------------------------
+            Isotope js Starts
+         --------------------------------------------- */
+        $(window).on('load', function () {
+            $('.gallery-filter ul li').on('click', function () {
+                $('.gallery-filter ul li').removeClass('active');
+                $(this).addClass('active');
+
+                var data = $(this).attr('data-filter');
+                $workGrid.isotope({
+                    filter: data
+                });
+            });
+
+            if (document.getElementById('portfolio')) {
+                var $workGrid = $('.gallery-grid').isotope({
+                    itemSelector: '.all',
+                    percentPosition: true,
+                    masonry: {
+                        columnWidth: '.grid-sizer'
+                    }
+                });
+            }
+        });
+    </script>
+}

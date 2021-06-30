@@ -1,0 +1,81 @@
+﻿@page
+@model Sh.Web.Pages.Admin.DetailsModel
+@{
+    ViewData["Title"] = "User Details";
+}
+
+<!--================ Start Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>@ViewData["Title"]</h2>
+                <div class="page_link">
+                    <a asp-area="" asp-page="/Index">Home</a>
+                    <a asp-page="/Admin/Index">Admin</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ End Banner Area =================-->
+<!--================ Start Details Area =================-->
+<section class="about_area section_gap">
+    <div class="container">
+        <div class="row justify-content-start align-items-center">
+            <div class="col-lg-8 mx-auto">
+                <div class="main_title text-center">
+                    <p class="top_text">Full Information <span></span></p>
+                    <br />
+                    <dl>
+                        <dt>
+                            User Name
+                        </dt>
+                        <dd>
+                            @Model.AppUser.UserName
+                        </dd>
+                        <dt>
+                            E-mail
+                        </dt>
+                        <dd>
+                            <a href="mailto:@Model.AppUser.Email">
+                                @Model.AppUser.Email
+                                @if (Model.AppUser.EmailConfirmed)
+                                {
+                                    <i class="far fa-check-square" style="color: green;"></i>
+                                }
+                            </a>
+                        </dd>
+                        <dt>
+                            Is Admin?
+                        </dt>
+                        <dd>
+                            @if (Model.IsAdmin)
+                            {
+                                <p>True <i class="fas fa-star" style="color: gold;"></i></p>
+                            }
+                            else
+                            {
+                                <p>False</p>
+                            }
+                        </dd>
+                        <dt>
+                            Is Blocked?
+                        </dt>
+                        <dd>
+                            @if (Model.AppUser.IsBlocked)
+                            {
+                                <p>@Model.AppUser.IsBlocked <i class="fas fa-lock" style="color: red;"></i></p>
+                            }
+                            else
+                            {
+                                <p>@Model.AppUser.IsBlocked <i class="fas fa-lock-open" style="color: green;"></i></p>
+                            }
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ End Details Area =================-->

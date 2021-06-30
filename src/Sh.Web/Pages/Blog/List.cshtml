@@ -1,0 +1,170 @@
+﻿@page
+@using Domain.Entities.BlogModel
+@model Sh.Web.Pages.Blog.ListModel
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = "Blog List";
+}
+
+@section CSS{ 
+    <link rel="stylesheet" href="~/css/blog_style.css" />
+}
+<!--================ Start Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>@Localizer["Blog"]</h2>
+                <div class="page_link">
+                    <a asp-area="" asp-page="/Index">@Localizer["Home"]</a>
+                    <a asp-page="/Blog/List">@Localizer["Blog"]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ End Banner Area =================-->
+<!--================Blog Area =================-->
+<section class="blog_area section-margin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="blog_left_sidebar">
+                    @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin")) 
+                    { 
+                        <a asp-page="/Blog/Create" class="action_btn rounded-0 primary-bg text-white mb-30"><i class="fas fa-plus-square"></i>&nbsp;@Localizer["Add New Article"]</a>
+                    }
+                    @if (!Model.Blogs.Any())
+                    {
+                        <h2>@Localizer["There are no any Posts yet"] :D</h2>
+                    }
+                    else
+                    {
+                        foreach (var post in Model.Blogs)
+                        {
+                            <article class="blog_item">
+                                <div class="blog_item_img">
+                                    @if (!string.IsNullOrEmpty(post.CoverPhotoPath))
+                                    {
+                                        <img class="card-img rounded-0" src="@post.CoverPhotoPath" alt="@post.Title">
+                                    }
+                                    else
+                                    {
+                                        <img class="card-img rounded-0" src="~/img/blog_image.png" alt="default cover photo" />
+                                    }
+                                    <a asp-page="/Blog/Index" asp-route-slug="@post.Slug" class="blog_item_date">
+                                        <h3>@post.PostedDate.ToString("dd")</h3>
+                                        <p>@post.PostedDate.ToString("MMM")</p>
+                                    </a>
+                                </div>
+                                <div class="blog_details">
+                                    @switch (Model.RCName.ToLower())
+                                    {
+                                        case "ru":
+                                            <a class="d-inline-block" asp-page="/Blog/Index" asp-route-slug="@post.Slug">
+                                                <h2>@post.TitleRu</h2>
+                                            </a>
+                                            <p>@Blog.GetShortContent(post.ContentRu, 200)</p>
+                                            break;
+                                        case "uz":
+                                            <a class="d-inline-block" asp-page="/Blog/Index" asp-route-slug="@post.Slug">
+                                                <h2>@post.TitleUz</h2>
+                                            </a>
+                                            <p>@Blog.GetShortContent(post.ContentUz, 200)</p>
+                                            break;
+                                        default:
+                                            <a class="d-inline-block" asp-page="/Blog/Index" asp-route-slug="@post.Slug">
+                                                <h2>@post.TitleUz</h2>
+                                            </a>
+                                            <p>@Blog.GetShortContent(post.ContentUz, 200)</p>
+                                            break;
+                                    }
+
+                                    <ul class="blog-info-link">
+                                        <li><i class="far fa-eye"></i>&nbsp;@post.ViewCount</li>
+                                        <li><i class="fas fa-calendar"></i>&nbsp;@post.PostedDate.ToString("dd MMMM, yyyy")</li>
+                                        <li><i class="fas fa-hashtag"></i>&nbsp;@Tag.ConvertTagsToString(post.Tags, '#')</li>
+                                    </ul>
+                                </div>
+                            </article>
+                        }
+                        <nav class="blog-pagination justify-content-center d-flex">
+                            <pagination class="mx-auto" page-index="@Model.Blogs.PageIndex" total-pages="@Model.Blogs.TotalPages" page-path="./List" base-url="/Blog/List" />
+                        </nav>
+                    }
+
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    
+                    <aside class="single_sidebar_widget search_widget">
+                        <form asp-action="/Blog/List" method="get">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="@Localizer["Keyword"]" asp-for="SearchString" value="@ViewData["CurrentFilter"]">
+                                </div>
+                            </div>
+                            <button class="primary_btn rounded-0 primary-bg text-white w-100" type="submit">@Localizer["Search"]</button>
+                        </form>
+                    </aside>
+
+                    <aside class="single_sidebar_widget popular_post_widget">
+                        <h3 class="widget_title">@Localizer["Popular Posts"]</h3>
+
+                        @foreach (var article in Model.PopularArticles)
+                        {
+                            <div class="media post_item">
+                                
+                                @if (!string.IsNullOrEmpty(article.CoverPhotoPath)) 
+                                { 
+                                    <div class="post_item_img">
+                                        <img src="@article.CoverPhotoPath" alt="@article.Title">
+                                    </div>
+                                    
+                                }
+                                else
+                                {
+                                    <div class="post_item_img">
+                                        <img src="~/img/blog_image.png" alt="Blog Cover Image">
+                                    </div>
+                                }
+                                <div class="media-body">
+                                    <a asp-page="/Blog/Index" asp-route-slug="@article.Slug">
+                                        @switch (Model.RCName.ToLower())
+                                        {
+                                            case "ru":
+                                                <h3>@article.TitleRu</h3>
+                                                break;
+                                            case "uz":
+                                                <h3>@article.TitleUz</h3>
+                                                break;
+                                            default:
+                                                <h3>@article.Title</h3>
+                                                break;
+                                        }
+                                    </a>
+                                    <p>@article.PostedDate.ToString("dd MMMM, yyyy")</p>
+                                </div>
+                            </div>
+                        }
+
+                    </aside>
+                    <aside class="single_sidebar_widget tag_cloud_widget">
+                        <h4 class="widget_title">@Localizer["Popular Tags"]</h4>
+                        <ul class="list">
+                            @foreach (var tag in Model.PopularTags)
+                            {
+                                <li>
+                                    <a asp-page="/Blog/List" asp-route-tag="@tag.Trim()">@tag</a>
+                                </li>
+                            }
+                        </ul>
+                    </aside>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================Blog Area =================-->

@@ -1,0 +1,109 @@
+﻿@page
+@model Sh.Web.Pages.Gallery.CreateModel
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = "Create";
+}
+
+<!--================ Start Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>@Localizer["Create new Media"]"</h2>
+                <div class="page_link">
+                    <a asp-area="" asp-page="/Index">@Localizer["Home"]</a>
+                    <a asp-page="/Gallery/Index">@Localizer["Gallery"]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ End Banner Area =================-->
+<!--================ Start Gallery Create Area =================-->
+<section class="section-margin">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mb-4 mb-lg-0 mx-auto">
+
+                <form method="post" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div id="uploadBtn" class="col-12">
+                            <a class="primary_btn rounded-0 primary-bg text-white mb-30 file-btn">
+                                <span>@Localizer["Choose an image"]</span>
+                                <input id="uploadInput" type="file" asp-for="Input.UploadPhoto" onchange="readURL(this);" value="Choose a file" accept="image/*" />
+                            </a>
+                        </div>
+
+                        <div id="removeBtn" class="mb-20 col-12">
+                            <button type="button" class="primary_btn" onclick="removeUpload()">@Localizer["Delete"] <span id="img -text"></span></button>
+                        </div>
+
+                        <div id="post-thumbnils" class="mb-30 col-lg-5" style="display: none;">
+                            <img id="uploadedImg" class="card-img" src="" alt="">
+                        </div>
+
+                        <div id="media-path" class="col-12">
+                            <div class="form-group">
+                                <label asp-for="Input.Media.MediaPath" class="font-weight-light"></label>
+                                <input id="exist_mp" asp-for="Input.Media.MediaPath" class="form-control" type="text" placeholder="https://example.com/test.jpg">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label class="font-weight-light">&nbsp;(<span class="font-weight-bold text-danger">*</span>@Localizer["Do not duplicate category names"])</label>
+                                <input asp-for="Input.Categories" class="form-control" type="text" placeholder="korea,uzbekistan,poland">
+                                <span asp-validation-for="Input.Categories" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group mt-lg-3">
+                        <button type="submit" class="primary_btn">@Localizer["Create"]</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ End Gallery Create Area =================-->
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            document.getElementById("removeBtn").style.display = "none";
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#uploadBtn').hide();
+                    $('#exist_mp').removeAttr('value');
+                    $('#media-path').hide();
+                    $('#uploadedImg').attr('src', e.target.result);
+                    $('#post-thumbnils').show();
+                    $('#removeBtn').show();
+                    $('#img-text').html(input.files[0].name);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+
+            } else {
+                removeUpload();
+            }
+        }
+
+        function removeUpload() {
+            $('#uploadInput').replaceWith($('#uploadInput').clone());
+            $('#removeBtn').hide();
+            $('#post-thumbnils').hide();
+            $('#uploadBtn').show();
+            $('#exist_mp').removeAttr('value');
+            $('#media-path').show();
+        }
+    </script>
+}

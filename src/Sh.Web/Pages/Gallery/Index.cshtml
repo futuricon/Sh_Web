@@ -1,0 +1,220 @@
+﻿@page
+@using Microsoft.AspNetCore.Antiforgery
+@model Sh.Web.Pages.Gallery.IndexModel
+@inject UserManager<AppUser> UserManager
+@inject IViewLocalizer Localizer
+@inject IAntiforgery antiforgery
+@{
+    var token = antiforgery.GetAndStoreTokens(HttpContext).RequestToken;
+}
+@{
+    ViewData["Title"] = "Gallery";
+}
+
+@section CSS {
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+    <link rel="stylesheet" href="~/css/gallery_style.css" />
+}
+
+<!--================ Start Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>@Localizer["Gallery"]</h2>
+                <div class="page_link">
+                    <a asp-area="" asp-page="/Index">@Localizer["Home"]</a>
+                    <a asp-page="/Gallery/Index">@Localizer["Gallery"]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ End Banner Area =================-->
+<!--================ Start Gallery Area =================-->
+<section class="gallery_area section-margin pb-0" id="gallery">
+    <div class="container">
+        @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
+        {
+            <ul class="action_list">
+                <li>
+                    <a asp-page="/Gallery/List" class="action_btn rounded-0 primary-bg text-white w-100 mb-30"><i class="fas fa-list"></i>&nbsp;&nbsp;&nbsp;@Localizer["Full List of Media"]</a>
+                </li>
+                <li>
+                    <a asp-page="/Gallery/Create" class="action_btn rounded-0 primary-bg text-white w-100 mb-30"><i class="fas fa-plus"></i>&nbsp;&nbsp;&nbsp;@Localizer["Add new Media"]</a>
+                </li>
+            </ul>
+        }
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="main_title">
+                    <p class="top_text">@Localizer["My Gallery"] <span></span></p>
+                    @if (!Model.Medias.Any())
+                    {
+                        <h2>@Localizer["Empty"] :D</h2>
+                    }
+                    else
+                    {
+                        <h2>@Localizer["Check My Photos & Video"]</h2>
+                    }
+                </div>
+            </div>
+        </div>
+        @if (Model.Medias.Any())
+        {
+            <div class="filters gallery-filter">
+                <ul>
+                    <li class="active" data-filter="*">@Localizer["all"]</li>
+                    <li data-filter=".latest"> @Localizer["latest"]</li>
+                    <li data-filter=".photo"> @Localizer["photo"]</li>
+                    <li data-filter=".video"> @Localizer["video"]</li>
+                    <li data-filter=".poland"> @Localizer["poland"]</li>
+                    <li data-filter=".korea"> @Localizer["korea"]</li>
+                    <li data-filter=".uzbekistan"> @Localizer["uzbekistan"]</li>
+                </ul>
+            </div>
+
+            <div class="filters-content">
+                <div id="img_container" class="row gallery-grid">
+                    <div class="grid-sizer col-md-3 col-lg-4"></div>
+
+                    @foreach (var media in Model.Medias)
+                    {
+                        @if (media.MediaType.ToString().ToLower() == "image")
+                        {
+                            <div class="col-lg-4 col-md-6 all latest photo @media.Categories.FirstOrDefault()">
+                                <a class="glightbox" href="@media.MediaPath">
+                                    <div class="single_gallery">
+                                        <img class="img-fluid w-100" src="@media.MediaPath" alt="@media.PostedDate.ToString(DateTimeFormatInfo.CurrentInfo.ShortDatePattern)">
+                                        <div class="overlay"></div>
+                                        <div class="short_info">
+                                            @foreach (var category in media.Categories)
+                                            {
+                                                <h4>@category.Name</h4>
+                                            }
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-lg-4 col-md-6 all latest video @media.Categories.FirstOrDefault()">
+                                <a class="glightbox" href="https://www.youtube.com/watch?v=@media.MediaPath">
+                                    <div class="single_gallery">
+                                        <img class="img-fluid w-100" src="https://img.youtube.com/vi/@media.MediaPath/hqdefault.jpg" alt="@media.PostedDate.ToString(DateTimeFormatInfo.CurrentInfo.ShortDatePattern)">
+                                        <div class="overlay"></div>
+                                        <div class="short_info">
+                                            @foreach (var category in media.Categories)
+                                            {
+                                                <h4>@category.Name</h4>
+                                            }
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        }
+                    }
+
+                </div>
+            </div>
+
+            <div class=" col-lg-4 col-md-6 mx-auto mt-lg-60">
+                <a onclick="GetMedia()" class="primary_btn rounded-0 primary-bg text-white w-100">@Localizer["Load More"]</a>
+            </div>
+        }
+    </div>
+    <input id="amount_img" type="hidden" value="@ViewData["Amount"]" />
+</section>
+<!--================ End Gallery Area =================-->
+
+@section Scripts {
+    <script src="~/vendors/isotope/imagesloaded.pkgd.min.js"></script>
+    <script src="~/vendors/isotope/isotope-min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+    <script>
+        const lightbox = GLightbox({
+            selector: '.glightbox',
+            touchNavigation: true,
+            loop: true,
+            autoplayVideos: true
+        });
+
+        /* ---------------------------------------------
+            Isotope js Starts
+         --------------------------------------------- */
+        $(window).on('load', function () {
+            $('.gallery-filter ul li').on('click', function () {
+                $('.gallery-filter ul li').removeClass('active');
+                $(this).addClass('active');
+
+                var data = $(this).attr('data-filter');
+                $workGrid.isotope({
+                    filter: data
+                });
+            });
+
+            if (document.getElementById('gallery')) {
+                var $workGrid = $('.gallery-grid').isotope({
+                    itemSelector: '.all',
+                    percentPosition: true,
+                    masonry: {
+                        columnWidth: '.grid-sizer'
+                    }
+                });
+            }
+        });
+
+        function GetMedia() {
+            var amount = parseInt($("#amount_img").val());
+            $.ajax({
+                type: "POST",
+                url: "/ru/Gallery?handler=Media",
+                data: { amount: amount },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN", '@token');
+                },
+                success: function (result) {
+                    console.log(result.length);
+                    $("#amount_img").val(function () {
+                        return this.value + result.length;
+                    });
+                    for (let i = 0; i < result.length; i++) {
+                        if (result[i].mediaType === 1) {
+                            var $newItems = $(
+                                `<div class="col-lg-4 col-md-6 all photo ${result[i].categories[0].name}">
+                                    <a class="glightbox" href="${result[i].mediaPath}">
+                                        <div class="single_gallery">
+                                            <img class="img-fluid w-100" src="${result[i].mediaPath}" alt="${result[i].categories[0].name}">
+                                            <div class="overlay"></div>
+                                            <div class="short_info">
+                                                <h4>${result[i].categories[0].name}</h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>`
+                            );
+                        }
+                        else {
+                            var $newItems = $(
+                                `<div class="col-lg-4 col-md-6 all video ${result[i].categories[0].name}">
+                                    <a class="glightbox" href="https://www.youtube.com/watch?v=${result[i].mediaPath}">
+                                        <div class="single_gallery">
+                                            <img class="img-fluid w-100" src="https://img.youtube.com/vi/${result[i].mediaPath}/hqdefault.jpg" alt="${result[i].categories[0].name}">
+                                            <div class="overlay"></div>
+                                            <div class="short_info">
+                                                <h4>${result[i].categories[0].name}</h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>`
+                            );
+                        }
+                        $('.gallery-grid').isotope('insert', $newItems);
+                        lightbox.reload();
+                    }
+                }
+            });
+        }
+    </script>
+}
