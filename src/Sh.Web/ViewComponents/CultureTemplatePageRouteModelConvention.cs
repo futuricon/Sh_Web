@@ -13,14 +13,24 @@ namespace Sh.Web.ViewComponents
             for (var i = 0; i < selectorCount; i++)
             {
                 var selector = model.Selectors[i];
-                var cultureString = "{culture=" + cultureInfo + "}";
+                //var cultureString = "{culture=" + cultureInfo + "}";
+                //model.Selectors.Add(new SelectorModel
+                //{
+                //    AttributeRouteModel = new AttributeRouteModel
+                //    {
+                //        Order = -1,
+                //        Template = AttributeRouteModel.CombineTemplates(
+                //            cultureString, selector.AttributeRouteModel.Template),
+                //    }
+                //});
+
                 model.Selectors.Add(new SelectorModel
                 {
                     AttributeRouteModel = new AttributeRouteModel
                     {
                         Order = -1,
                         Template = AttributeRouteModel.CombineTemplates(
-                            cultureString, selector.AttributeRouteModel.Template),
+                            "{culture?}", selector.AttributeRouteModel.Template),
                     }
                 });
             }

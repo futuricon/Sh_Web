@@ -1,4 +1,9 @@
-﻿
+﻿.pb-lg-80 {
+    padding-bottom: 80px;
+}
+.pb-40{
+    padding-bottom: 40px;
+}
 .testimonial_area {
     padding-bottom: 100px
 }

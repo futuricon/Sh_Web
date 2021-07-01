@@ -1551,3 +1551,64 @@ input[type="file"] {
         background: #052daf;
         color: #fff
     }
+
+    /*Gallery & Portfolio*/
+
+.spinner {
+    animation: rotator 1.4s linear infinite;
+}
+
+@keyframes rotator {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(270deg);
+    }
+}
+
+.path {
+    stroke-dasharray: 187;
+    stroke-dashoffset: 0;
+    transform-origin: center;
+    animation: dash 1.4s ease-in-out infinite, colors 5.6s ease-in-out infinite;
+}
+
+@keyframes colors {
+    0% {
+        stroke: #1345e6;
+    }
+
+    25% {
+        stroke: #ed239f;
+    }
+
+    50% {
+        stroke: #1345e6;
+    }
+
+    75% {
+        stroke: #ed239f;
+    }
+
+    100% {
+        stroke: #1345e6;
+    }
+}
+
+@keyframes dash {
+    0% {
+        stroke-dashoffset: 187;
+    }
+
+    50% {
+        stroke-dashoffset: 46.75;
+        transform: rotate(135deg);
+    }
+
+    100% {
+        stroke-dashoffset: 187;
+        transform: rotate(450deg);
+    }
+}

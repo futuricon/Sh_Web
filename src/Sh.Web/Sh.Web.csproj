@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ViewComponents\CultureAnchorTagHelper.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.7" />
@@ -24,6 +28,27 @@
   
   <ItemGroup>
     <ProjectReference Include="..\Sh.Infrastructure\Sh.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\img\banner\" />
+    <Folder Include="wwwroot\img\testi_imgs\" />
+    <Folder Include="wwwroot\img\post_imgs\" />    
+    <Folder Include="wwwroot\img\gallery_imgs\" />    
+    <Folder Include="wwwroot\img\project_imgs\" />    
+    <Folder Include="wwwroot\pdfFiles\CVFile\" />    
+    <Folder Include="wwwroot\pdfFiles\ProjectFile\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\vendors\fontawesome\bootstrap.bundle.min.js" />
+    <None Include="wwwroot\vendors\fontawesome\webfonts\fa-brands-400.woff2" />
+    <None Include="wwwroot\vendors\fontawesome\webfonts\fa-regular-400.woff2" />
+    <None Include="wwwroot\vendors\fontawesome\webfonts\fa-solid-900.woff2" />
+    <None Include="wwwroot\vendors\isotope\imagesloaded.pkgd.min.js" />
+    <None Include="wwwroot\vendors\isotope\isotope-min.js" />
+    <None Include="wwwroot\vendors\jquery-ui\jquery-ui.js" />
+    <None Include="wwwroot\vendors\owl-carousel\owl.carousel.min.js" />
   </ItemGroup>
 
 </Project>

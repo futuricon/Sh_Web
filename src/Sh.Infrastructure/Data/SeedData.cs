@@ -12,13 +12,13 @@ namespace Sh.Infrastructure.Data
         public static async void Initialize(IServiceProvider service)
         {
             await CreateUserRolesAsync(service);
-            await AddSuperAdminRoleToSiteOwnerAsync(service);
             await CreateUserAccountAsync(service);
+            await AddRoleToUserAccountAsync(service);
         }
 
-        private static async Task CreateUserRolesAsync(IServiceProvider serviceProvider)
+        private static async Task CreateUserRolesAsync(IServiceProvider service)
         {
-            var roleManager = serviceProvider.GetRequiredService<RoleManager<UserRole>>();
+            var roleManager = service.GetRequiredService<RoleManager<UserRole>>();
 
             var superAdminRole = await roleManager.RoleExistsAsync(Role.SuperAdmin.ToString());
             var adminRole = await roleManager.RoleExistsAsync(Role.Admin.ToString());
@@ -41,29 +41,14 @@ namespace Sh.Infrastructure.Data
             }
         }
 
-        private static async Task AddSuperAdminRoleToSiteOwnerAsync(IServiceProvider service)
-        {
-            var userManager = service.GetRequiredService<UserManager<AppUser>>();
-            var siteOwner = await userManager.FindByEmailAsync("kudratovsuhrob@gmail.com");
-
-            if (siteOwner == null)
-                return;
-
-            var hasSuperAdminRole = await userManager.IsInRoleAsync(siteOwner, Role.SuperAdmin.ToString());
-
-            if (!hasSuperAdminRole)
-            {
-                await userManager.AddToRoleAsync(siteOwner, Role.SuperAdmin.ToString());
-            }
-        }
-
         private static async Task CreateUserAccountAsync(IServiceProvider service)
         {
             var userManager = service.GetRequiredService<UserManager<AppUser>>();
             var config = service.GetRequiredService<IConfiguration>();
 
-            var UserAccount = await userManager.FindByNameAsync("Futuricon");
-            if (UserAccount == null)
+            var SuperAccount = await userManager.FindByNameAsync("Futuricon");
+            var AdminAccount = await userManager.FindByNameAsync("Shakhlo");
+            if (SuperAccount == null)
             {
                 try
                 {
@@ -73,7 +58,7 @@ namespace Sh.Infrastructure.Data
                         Email = "kudratovsuhrob@gmail.com",
                         EmailConfirmed = true
                     },
-                    config.GetSection("EmailPassword").Value);
+                    config.GetSection("SuperPassword").Value);
                 }
                 catch (Exception e)
                 {
@@ -81,20 +66,47 @@ namespace Sh.Infrastructure.Data
                 }
 
             }
-
-            try
+            if (AdminAccount == null)
             {
-                var hasSuperAdminRole = await userManager.IsInRoleAsync(UserAccount, Role.SuperAdmin.ToString());
-
-                if (!hasSuperAdminRole)
+                try
                 {
-                    await userManager.AddToRoleAsync(UserAccount, Role.SuperAdmin.ToString());
+                    await userManager.CreateAsync(new AppUser()
+                    {
+                        UserName = "Shakhlo",
+                        Email = "keepline@inbox.ru",
+                        EmailConfirmed = true
+                    },
+                    config.GetSection("AdminPassword").Value);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.InnerException.Message);
                 }
             }
-            catch (Exception e)
+        }
+
+        private static async Task AddRoleToUserAccountAsync(IServiceProvider service)
+        {
+            var userManager = service.GetRequiredService<UserManager<AppUser>>();
+            var siteSuper = await userManager.FindByNameAsync("Futuricon");
+            var siteAdmin = await userManager.FindByNameAsync("Shakhlo");
+
+            if (siteSuper == null)
+                return;
+            var hasSuperRole = await userManager.IsInRoleAsync(siteSuper, Role.SuperAdmin.ToString());
+            if (!hasSuperRole)
             {
-                Console.WriteLine(e.InnerException.Message);
+                await userManager.AddToRoleAsync(siteSuper, Role.SuperAdmin.ToString());
             }
+
+            if (siteAdmin == null)
+                return;
+            var hasAdminRole = await userManager.IsInRoleAsync(siteAdmin, Role.Admin.ToString());
+            if (!hasAdminRole)
+            {
+                await userManager.AddToRoleAsync(siteAdmin, Role.Admin.ToString());
+            }
+
         }
     }
 }

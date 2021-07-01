@@ -1,0 +1,134 @@
+﻿@page
+@model Sh.Web.Pages.Dossier.CreateModel
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = "Create";
+}
+
+@section CSS {
+    <link rel="stylesheet" href="~/css/blog_style.css" />
+}
+
+<!--================ Start Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>@Localizer["Create new Testimonial"]"</h2>
+                <div class="page_link">
+                    <a asp-area="" asp-page="/Index">@Localizer["Home"]</a>
+                    <a asp-page="/About">@Localizer["About"]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ End Banner Area =================-->
+<!--================Testimonial Area =================-->
+<section class="pb-lg-80 pb-40 section-margin">
+    <div class="container">
+        <form method="post" enctype="multipart/form-data">
+            <!-- photo input start -->
+            <div id="uploadBtn" class="col-12 p-0">
+                <a class="primary_btn rounded-0 primary-bg text-white mb-30 file-btn">
+                    <span>@Localizer["Choose an image"]</span>
+                    <input id="uploadInput" type="file" asp-for="Input.UploadCoverPhoto" onchange="readURL(this);" value="Choose a file" accept="image/*" />
+                </a>
+            </div>
+
+            <div id="removeBtn" class="mb-20 col-12 p-0">
+                <button type="button" class="primary_btn rounded-0" onclick="removeUpload()">@Localizer["Delete"] <span id="img -text"></span></button>
+            </div>
+
+            <div id="post-thumbnils" class="mb-30 col-lg-5 p-0" style="display: none;">
+                <img id="uploadedImg" class="card-img" src="" alt="">
+            </div>
+            <!-- photo input end -->
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.Dossier.FirstName" class="control-label"></label>
+                <input asp-for="Input.Dossier.FirstName" class="form-control" />
+                <span asp-validation-for="Input.Dossier.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Dossier.LastName" class="control-label"></label>
+                <input asp-for="Input.Dossier.LastName" class="form-control" />
+                <span asp-validation-for="Input.Dossier.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Dossier.Position" class="control-label"></label>
+                <input asp-for="Input.Dossier.Position" class="form-control" />
+                <span asp-validation-for="Input.Dossier.Position" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Dossier.PositionRu" class="control-label"></label>
+                <input asp-for="Input.Dossier.PositionRu" class="form-control" />
+                <span asp-validation-for="Input.Dossier.PositionRu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Dossier.PositionUz" class="control-label"></label>
+                <input asp-for="Input.Dossier.PositionUz" class="form-control" />
+                <span asp-validation-for="Input.Dossier.PositionUz" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Dossier.Description" class="control-label"></label>
+                <textarea asp-for="Input.Dossier.Description" class="form-control"></textarea>
+                <span asp-validation-for="Input.Dossier.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Dossier.DescriptionRu" class="control-label"></label>
+                <textarea asp-for="Input.Dossier.DescriptionRu" class="form-control"></textarea>
+                <span asp-validation-for="Input.Dossier.DescriptionRu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Dossier.DescriptionUz" class="control-label"></label>
+                <textarea asp-for="Input.Dossier.DescriptionUz" class="form-control"></textarea>
+                <span asp-validation-for="Input.Dossier.DescriptionUz" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-lg-5">
+                <button type="submit" class="primary_btn button-contactForm">@Localizer["Create"]</button>
+            </div>
+        </form>
+    </div>
+</section>
+<!--================Testimonial Area =================-->
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+        $(document).ready(function () {
+            document.getElementById("removeBtn").style.display = "none";
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#uploadBtn').hide();
+                    $('#media-path').hide();
+                    $('#uploadedImg').attr('src', e.target.result);
+                    $('#post-thumbnils').show();
+                    $('#removeBtn').show();
+                    $('#img-text').html(input.files[0].name);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+
+            } else {
+                removeUpload();
+            }
+        }
+
+        function removeUpload() {
+            $('#uploadInput').replaceWith($('#uploadInput').clone());
+            $('#removeBtn').hide();
+            $('#post-thumbnils').hide();
+            $('#uploadBtn').show();
+            $('#media-path').show();
+        }
+
+    </script>
+}

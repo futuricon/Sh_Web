@@ -22,7 +22,7 @@
                 <h2>@Localizer["Portfolio"]</h2>
                 <div class="page_link">
                     <a asp-area="" asp-page="/Index">@Localizer["Home"]</a>
-                    <a asp-page="/Portfolio/List">@Localizer["Contacts"]</a>
+                    <a asp-page="/Portfolio/List">@Localizer["Portfolio"]</a>
                 </div>
             </div>
         </div>
@@ -93,8 +93,13 @@
                 </div>
             </div>
 
-            <div class=" col-lg-4 col-md-6 mx-auto mt-lg-60">
-                <a onclick="GetMedia()" class="primary_btn rounded-0 primary-bg text-white w-100">@Localizer["Load More"]</a>
+            <div id="more_btn" class=" col-lg-4 col-md-6 mx-auto mt-lg-60">
+                <a onclick="setTimeout(GetMedia, 1000)" class="primary_btn rounded-0 primary-bg text-white w-100">@Localizer["Load More"]</a>
+            </div>
+            <div id="spnr" class="col-lg-4 col-md-6 mx-auto mt-lg-60 text-center" style="display: none">
+                <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                </svg>
             </div>
         }
 
@@ -124,11 +129,16 @@
             }
         });
 
+        $("#more_btn a").click(function () {
+            $("#more_btn").hide();
+            $("#spnr").show();
+        });
+
         function GetMedia() {
             var amount = parseInt($("#amount_prjct").val());
             $.ajax({
                 type: "POST",
-                url: "/ru/Portfolio?handler=Project",
+                url: "Portfolio/List?handler=Project",
                 data: { amount: amount },
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("XSRF-TOKEN", '@token');
@@ -192,6 +202,8 @@
                     }
                 }
             });
+            $("#more_btn").show();
+            $("#spnr").hide();
         }
     </script>
 }

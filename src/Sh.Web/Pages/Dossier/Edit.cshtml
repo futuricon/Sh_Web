@@ -1,0 +1,169 @@
+﻿@page
+@model Sh.Web.Pages.Dossier.EditModel
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = "Edit";
+}
+
+@section CSS {
+    <link rel="stylesheet" href="~/css/blog_style.css" />
+}
+
+<!--================ Start Banner Area =================-->
+<section class="banner_area">
+    <div class="banner_inner d-flex align-items-center">
+        <div class="container">
+            <div class="banner_content text-center">
+                <h2>@Localizer["Edit this Testimonial"]"</h2>
+                <div class="page_link">
+                    <a asp-area="" asp-page="/Index">@Localizer["Home"]</a>
+                    <a asp-page="/About">@Localizer["About"]</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ End Banner Area =================-->
+<!--================Testimonial Area =================-->
+<section class="pb-lg-80 pb-40 section-margin">
+    <div class="container">
+        <div class="col-10">
+            <form method="post" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Input.Dossier.Id" />
+                <!-- photo input start -->
+                <div id="uploadBtn" class="col-12 p-0" style="display: none;">
+                    <a class="primary_btn rounded-0 primary-bg text-white mb-30 file-btn">
+                        <span>@Localizer["Choose an image"]</span>
+                        <input id="uploadInput" type="file" asp-for="Input.UploadCoverPhoto" onchange="readURL(this);" value="Choose a file" accept="image/*" />
+                    </a>
+                </div>
+
+                <div id="removeBtn" class="mb-20 col-12 p-0">
+                    <button type="button" class="primary_btn button-contactForm rounded-0" onclick="removeUpload()">@Localizer["Delete"] <span id="img -text"></span></button>
+                </div>
+
+                <div id="post-thumbnils" class="mb-30 col-lg-5 p-0">
+                    <img id="uploadedImg" class="card-img" src="@Model.Input.Dossier.CoverPhotoPath" alt="">
+                </div>
+                <!-- photo input end -->
+
+                <div class="form-group">
+                    <label asp-for="Input.Dossier.FirstName" class="control-label"></label>
+                    <input asp-for="Input.Dossier.FirstName" class="form-control" />
+                    <span asp-validation-for="Input.Dossier.FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Dossier.LastName" class="control-label"></label>
+                    <input asp-for="Input.Dossier.LastName" class="form-control" />
+                    <span asp-validation-for="Input.Dossier.LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Dossier.Position" class="control-label"></label>
+                    <input asp-for="Input.Dossier.Position" class="form-control" />
+                    <span asp-validation-for="Input.Dossier.Position" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Dossier.PositionRu" class="control-label"></label>
+                    <input asp-for="Input.Dossier.PositionRu" class="form-control" />
+                    <span asp-validation-for="Input.Dossier.PositionRu" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Dossier.PositionUz" class="control-label"></label>
+                    <input asp-for="Input.Dossier.PositionUz" class="form-control" />
+                    <span asp-validation-for="Input.Dossier.PositionUz" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Dossier.Description" class="control-label"></label>
+                    <textarea asp-for="Input.Dossier.Description" class="form-control"></textarea>
+                    <span asp-validation-for="Input.Dossier.Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Dossier.DescriptionRu" class="control-label"></label>
+                    <textarea asp-for="Input.Dossier.DescriptionRu" class="form-control"></textarea>
+                    <span asp-validation-for="Input.Dossier.DescriptionRu" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Dossier.DescriptionUz" class="control-label"></label>
+                    <textarea asp-for="Input.Dossier.DescriptionUz" class="form-control"></textarea>
+                    <span asp-validation-for="Input.Dossier.DescriptionUz" class="text-danger"></span>
+                </div>
+                @if (Model.Input.Dossier.IsAboutInfo)
+                {
+                    <div class="form-group">
+                        <label asp-for="Input.Dossier.Address" class="control-label"></label>
+                        <input asp-for="Input.Dossier.Address" class="form-control" />
+                        <span asp-validation-for="Input.Dossier.Address" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Dossier.PhoneNumber" class="control-label"></label>
+                        <input type="tel" asp-for="Input.Dossier.PhoneNumber" class="form-control" />
+                        <span asp-validation-for="Input.Dossier.PhoneNumber" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Input.Dossier.Email" class="control-label"></label>
+                        <input type="email" asp-for="Input.Dossier.Email" class="form-control" />
+                        <span asp-validation-for="Input.Dossier.Email" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <a class="action_btn rounded-0 primary-bg text-white mb-30 file-btn">
+                            <span id="file_name">@Localizer["Choose a CV File"]</span>
+                            <input id="uploadInput" type="file" asp-for="Input.UploadCVFile" onchange="readCVFile(this);" value="Choose a file" accept="application/pdf" />
+                        </a>
+                    </div>
+                }
+                <div class="form-group mt-lg-5">
+                    <button type="submit" class="primary_btn button-contactForm">@Localizer["Update"]</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+<!--================Testimonial Area =================-->
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+        function readCVFile(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#file_name').html(input.files[0].name);
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                removeUpload();
+            }
+        }
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#uploadBtn').hide();
+                    $('#media-path').hide();
+                    $('#uploadedImg').attr('src', e.target.result);
+                    $('#post-thumbnils').show();
+                    $('#removeBtn').show();
+                    $('#img-text').html(input.files[0].name);
+                };
+                reader.readAsDataURL(input.files[0]);
+
+            } else {
+                removeUpload();
+            }
+        }
+
+        function removeUpload() {
+            $('#uploadInput').replaceWith($('#uploadInput').clone());
+            $('#removeBtn').hide();
+            $('#post-thumbnils').hide();
+            $('#uploadBtn').show();
+            $('#media-path').show();
+        }
+
+    </script>
+}
+

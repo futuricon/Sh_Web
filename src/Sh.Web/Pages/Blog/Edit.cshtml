@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id}"
 @model Sh.Web.Pages.Blog.EditModel
 @inject IViewLocalizer Localizer
 @{
@@ -28,72 +28,65 @@
 <!--================Blog Area =================-->
 <section class="blog_area section-margin">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mb-5 mb-lg-0 mx-auto">
-                <div class="blog_left_sidebar">
-
-                    <form method="post" enctype="multipart/form-data">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <input type="hidden" asp-for="Input.Blog.Id" />
-                        <!-- photo input start -->
-                        <div id="uploadBtn" class="col-12 p-0" style="display: none;">
-                            <a class="primary_btn rounded-0 primary-bg text-white mb-30 file-btn">
-                                <span>@Localizer["Choose an image"]</span>
-                                <input id="uploadInput" type="file" asp-for="Input.UploadCoverPhoto" onchange="readURL(this);" value="Choose a file" accept="image/*" />
-                            </a>
-                        </div>
-
-                        <div id="removeBtn" class="mb-20 col-12 p-0">
-                            <button type="button" class="primary_btn button-contactForm" onclick="removeUpload()">@Localizer["Delete"] <span id="img -text"></span></button>
-                        </div>
-
-                        <div id="post-thumbnils" class="mb-30 col-lg-5 p-0">
-                            <img id="uploadedImg" class="card-img" src="@Model.Input.Blog.CoverPhotoPath" alt="">
-                        </div>
-                        <!-- photo input end -->
-
-                        <div class="form-group">
-                            <label asp-for="Input.Blog.Title" class="control-label"></label>
-                            <input asp-for="Input.Blog.Title" class="form-control" />
-                            <span asp-validation-for="Input.Blog.Title" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Input.Blog.TitleRu" class="control-label"></label>
-                            <input asp-for="Input.Blog.TitleRu" class="form-control" />
-                            <span asp-validation-for="Input.Blog.TitleRu" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Input.Blog.TitleUz" class="control-label"></label>
-                            <input asp-for="Input.Blog.TitleUz" class="form-control" />
-                            <span asp-validation-for="Input.Blog.TitleUz" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Input.Blog.Content" class="control-label"></label>
-                            <textarea asp-for="Input.Blog.Content" class="form-control"></textarea>
-                            <span asp-validation-for="Input.Blog.Content" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Input.Blog.ContentRu" class="control-label"></label>
-                            <textarea asp-for="Input.Blog.ContentRu" class="form-control"></textarea>
-                            <span asp-validation-for="Input.Blog.ContentRu" class="text-danger"></span>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Input.Blog.ContentUz" class="control-label"></label>
-                            <textarea asp-for="Input.Blog.ContentUz" class="form-control"></textarea>
-                            <span asp-validation-for="Input.Blog.ContentUz" class="text-danger"></span>
-                        </div>
-                        <div class="form-group mt-20">
-                            <label class="font-weight-light">&nbsp;(<span class="font-weight-bold text-danger">*</span>@Localizer["Do not duplicate tag names"])</label>
-                            <input asp-for="Input.Tags" class="form-control" />
-                            <span asp-validation-for="Input.Tags" class="text-danger"></span>
-                        </div>
-                        <div class="form-group mt-lg-5">
-                            <button type="submit" class="primary_btn button-contactForm">@Localizer["Update"]</button>
-                        </div>
-                    </form>
-                </div>
+        <form method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Input.Blog.Id" />
+            <!-- photo input start -->
+            <div id="uploadBtn" class="col-12 p-0" style="display: none;">
+                <a class="primary_btn rounded-0 primary-bg text-white mb-30 file-btn">
+                    <span>@Localizer["Choose an image"]</span>
+                    <input id="uploadInput" type="file" asp-for="Input.UploadCoverPhoto" onchange="readURL(this);" value="Choose a file" accept="image/*" />
+                </a>
             </div>
-        </div>
+
+            <div id="removeBtn" class="mb-20 col-12 p-0">
+                <button type="button" class="primary_btn button-contactForm" onclick="removeUpload()">@Localizer["Delete"] <span id="img -text"></span></button>
+            </div>
+
+            <div id="post-thumbnils" class="mb-30 col-lg-5 p-0">
+                <img id="uploadedImg" class="card-img" src="@Model.Input.Blog.CoverPhotoPath" alt="">
+            </div>
+            <!-- photo input end -->
+
+            <div class="form-group">
+                <label asp-for="Input.Blog.Title" class="control-label"></label>
+                <input asp-for="Input.Blog.Title" class="form-control" />
+                <span asp-validation-for="Input.Blog.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Blog.TitleRu" class="control-label"></label>
+                <input asp-for="Input.Blog.TitleRu" class="form-control" />
+                <span asp-validation-for="Input.Blog.TitleRu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Blog.TitleUz" class="control-label"></label>
+                <input asp-for="Input.Blog.TitleUz" class="form-control" />
+                <span asp-validation-for="Input.Blog.TitleUz" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Blog.Content" class="control-label"></label>
+                <textarea asp-for="Input.Blog.Content" class="form-control"></textarea>
+                <span asp-validation-for="Input.Blog.Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Blog.ContentRu" class="control-label"></label>
+                <textarea asp-for="Input.Blog.ContentRu" class="form-control"></textarea>
+                <span asp-validation-for="Input.Blog.ContentRu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Blog.ContentUz" class="control-label"></label>
+                <textarea asp-for="Input.Blog.ContentUz" class="form-control"></textarea>
+                <span asp-validation-for="Input.Blog.ContentUz" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-20">
+                <label class="font-weight-light">&nbsp;(<span class="font-weight-bold text-danger">*</span>@Localizer["Do not duplicate tag names"])</label>
+                <input asp-for="Input.Tags" class="form-control" />
+                <span asp-validation-for="Input.Tags" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-lg-5">
+                <button type="submit" class="primary_btn button-contactForm">@Localizer["Update"]</button>
+            </div>
+        </form>
     </div>
 </section>
 <!--================Blog Area =================-->

@@ -39,15 +39,13 @@ namespace Sh.Web.ViewComponents
         private const string Href = "href";
 
         private readonly IHttpContextAccessor contextAccessor;
-        
+        private readonly string defaultRequestCulture = "en";
+
         public override void Process(TagHelperContext context, TagHelperOutput output)
         {
-            //var cultureInfo = Thread.CurrentThread.CurrentCulture;
-            //RouteValues["culture"] = cultureInfo.ToString();
-
             var culture = (string)contextAccessor.HttpContext.Request.RouteValues["culture"];
 
-            if (culture != null)
+            if (culture != null && culture != defaultRequestCulture)
             {
                 RouteValues["culture"] = culture;
             }

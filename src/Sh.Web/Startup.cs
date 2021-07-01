@@ -34,9 +34,9 @@ namespace Sh.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddRazorPages(options => {
-                options.Conventions.Add(new CultureTemplatePageRouteModelConvention());
-            });
+            //services.AddRazorPages(options => {
+            //    options.Conventions.Add(new CultureTemplatePageRouteModelConvention());
+            //});
 
             services.Configure<RequestLocalizationOptions>(options =>
             {
@@ -63,7 +63,7 @@ namespace Sh.Web
             services.AddScoped<IBlogRepository, BlogRepository>();
             services.AddScoped<IGalleryRepository, GalleryRepository>();
             services.AddScoped<IPortfolioRepository, PortfolioRepository>();
-            services.AddScoped<ITestimonialRepository, TestimonialRepository>();
+            services.AddScoped<IDossierRepository, DossierRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 
             ConfigureIdentity(services);
@@ -86,23 +86,24 @@ namespace Sh.Web
                         factory.Create(typeof(SharedResource));
                 });
 
-            services.AddRazorPages()
-                .AddRazorPagesOptions(options =>
-                {
-                    // Remove routes ending with /Index
-                    options.Conventions.AddFolderRouteModelConvention("/", model =>
-                    {
-                        var selectorCount = model.Selectors.Count;
-                        for (var i = selectorCount - 1; i >= 0; i--)
-                        {
-                            var selectorTemplate = model.Selectors[i].AttributeRouteModel.Template;
-                            if (selectorTemplate.EndsWith("Index"))
-                            {
-                                model.Selectors.RemoveAt(i);
-                            }
-                        }
-                    });
-                });
+            //services.AddRazorPages()
+            //    .AddRazorPagesOptions(options =>
+            //    {
+            //        // Remove routes ending with /Index
+            //        options.Conventions.AddFolderRouteModelConvention("/", model =>
+            //        {
+            //            var selectorCount = model.Selectors.Count;
+            //            for (var i = selectorCount - 1; i >= 0; i--)
+            //            {
+            //                var selectorTemplate = model.Selectors[i].AttributeRouteModel.Template;
+            //                if (selectorTemplate.EndsWith("Index"))
+            //                {
+            //                    model.Selectors.RemoveAt(i);
+            //                }
+            //            }
+            //        });
+            //    });
+
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);

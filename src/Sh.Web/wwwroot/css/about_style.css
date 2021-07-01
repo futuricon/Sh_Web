@@ -10,10 +10,19 @@
     .about_area h2 {
         margin-bottom: 30px
     }
+    .about_area h4 {
+        font-size: 20px;
+        color: #797979;
+        margin-top: -20px;
+        margin-bottom: 20px;
+    }
 
 @media (max-width: 991px) {
     .about_area h2 {
         margin-bottom: 20px
+    }
+    .about_area h4 {
+        margin-top: -10px;
     }
 }
 
@@ -46,5 +55,11 @@
 @media (max-width: 991px) {
     .about_area .about_img {
         display: none
+    }
+}
+
+@media (max-width: 575px) {
+    .about_area h4 {
+        font-size: 16px;
     }
 }

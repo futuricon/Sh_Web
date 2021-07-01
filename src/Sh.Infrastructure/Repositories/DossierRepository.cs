@@ -1,30 +1,30 @@
 ﻿using System.Threading.Tasks;
-using Sh.Domain.Entities.TestimonialModel;
+using Sh.Domain.Entities.DossierModel;
 using Sh.Domain.Interfaces.Repositories;
 using Sh.Infrastructure.Data;
 
 namespace Sh.Infrastructure.Repositories
 {
-    public class TestimonialRepository : Repository, ITestimonialRepository
+    public class DossierRepository : Repository, IDossierRepository
     {
         private readonly ApplicationDbContext _context;
 
-        public TestimonialRepository(ApplicationDbContext context) : base(context)
+        public DossierRepository(ApplicationDbContext context) : base(context)
         {
             _context = context;
         }
 
-        public Task AddTestimonialAsync(Testimonial testimonial)
+        public Task AddDossierAsync(Dossier testimonial)
         {
             return AddAsync(testimonial);
         }
 
-        public async Task DeleteTestimonialAsync(Testimonial testimonial)
+        public async Task DeleteDossierAsync(Dossier testimonial)
         {
             await DeleteAsync(testimonial); 
         }
 
-        public Task UpdateTestimonialAsync(Testimonial testimonial)
+        public Task UpdateDossierAsync(Dossier testimonial)
         {
             return UpdateAsync(testimonial);
         }

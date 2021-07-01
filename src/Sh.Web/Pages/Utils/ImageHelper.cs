@@ -10,7 +10,8 @@ namespace Sh.Web.Pages.Utils
     public class ImageHelper
     {
         private readonly IWebHostEnvironment _env;
-        public const string DefaultCoverPhotoPath = "/img/blog_image.png";
+        public const string DefaultCoverPhotoPath = "/img/blog_image.jpg";
+        public const string DefaultTestiPhotoPath = "/img/profile_image.jpg";
 
         public ImageHelper(IWebHostEnvironment env)
         {
@@ -42,6 +43,10 @@ namespace Sh.Web.Pages.Utils
             }
             catch (Exception)
             {
+                if (subFolder == "dossier_imgs")
+                {
+                    return DefaultTestiPhotoPath;
+                }
                 return DefaultCoverPhotoPath;
             }
         }

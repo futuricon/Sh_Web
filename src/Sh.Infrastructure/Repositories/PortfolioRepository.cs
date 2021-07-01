@@ -27,9 +27,12 @@ namespace Sh.Infrastructure.Repositories
             await DeleteAsync(project);
         }
 
-        public Task UpdateProjectAsync(Project project)
+        public Task UpdateProjectAsync(Project project, bool verifySlug = true)
         {
-            project.Slug = GetVerifiedProjectSlug(project);
+            if (verifySlug)
+            {
+                project.Slug = GetVerifiedProjectSlug(project);
+            }
             return UpdateAsync(project);
         }
 

@@ -119,8 +119,13 @@
                 </div>
             </div>
 
-            <div class=" col-lg-4 col-md-6 mx-auto mt-lg-60">
-                <a onclick="GetMedia()" class="primary_btn rounded-0 primary-bg text-white w-100">@Localizer["Load More"]</a>
+            <div id="more_btn" class=" col-lg-4 col-md-6 mx-auto mt-lg-60">
+                <a onclick="setTimeout(GetMedia, 1000)" class="primary_btn rounded-0 primary-bg text-white w-100">@Localizer["Load More"]</a>
+            </div>
+            <div id="spnr" class="col-lg-4 col-md-6 mx-auto mt-lg-60 text-center" style="display: none">
+                <svg class="spinner" width="65px" height="65px" viewBox="0 0 66 66" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle>
+                </svg>
             </div>
         }
     </div>
@@ -165,11 +170,20 @@
             }
         });
 
+        $("#more_btn a").click(function () {
+            $("#more_btn").hide();
+            $("#spnr").show();
+        });
+        var enough = true;
         function GetMedia() {
+            $("#more_btn").hide();
+            $("#spnr").show();
             var amount = parseInt($("#amount_img").val());
-            $.ajax({
+            if (enough) {
+                $.ajax({
                 type: "POST",
-                url: "/ru/Gallery?handler=Media",
+                url: "Gallery/Index?handler=Media",
+                //url: "/ru/Gallery?handler=Media", ////FOR CULTURE
                 data: { amount: amount },
                 beforeSend: function (xhr) {
                     xhr.setRequestHeader("XSRF-TOKEN", '@token');
@@ -179,6 +193,9 @@
                     $("#amount_img").val(function () {
                         return this.value + result.length;
                     });
+                    if ($("#amount_img").val()%5 != 0) {
+                        enough = false;
+                    }
                     for (let i = 0; i < result.length; i++) {
                         if (result[i].mediaType === 1) {
                             var $newItems = $(
@@ -213,8 +230,15 @@
                         $('.gallery-grid').isotope('insert', $newItems);
                         lightbox.reload();
                     }
+                },
+                complete: function () {
+                    if (enough) {
+                        $("#more_btn").show();
+                    }
+                    $("#spnr").hide();
                 }
             });
+            }
         }
     </script>
 }
