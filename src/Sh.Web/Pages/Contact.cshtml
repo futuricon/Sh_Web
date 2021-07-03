@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "Contacts";
 }
-@section CSS{ 
+@section CSS{
     <link rel="stylesheet" href="~/css/contact_style.css" />
 }
 
@@ -35,37 +35,36 @@
             </div>
         </div>
 
-
         <div class="row">
             <div class="col-12">
                 <h2 class="contact-title">@Localizer["Get in Touch"]</h2>
             </div>
             <div class="col-lg-8 mb-4 mb-lg-0">
-                <form class="form-contact contact_form" method="post">
+                <form id="MsgForm" class="form-contact contact_form" method="post">
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input class="form-control" type="text" placeholder="@Localizer["Enter your name"]">
+                                <input id="AuthorName" class="form-control" type="text" placeholder="@Localizer["Enter your name"]">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <input class="form-control" type="email" placeholder="@Localizer["Enter email address"]">
+                                <input id="AuthorEmail" class="form-control" type="email" placeholder="@Localizer["Enter email address"]">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <input class="form-control" type="text" placeholder="@Localizer["Enter Subject"]">
+                                <input id="MsgSubject" class="form-control" type="text" placeholder="@Localizer["Enter Subject"]">
                             </div>
                         </div>
                         <div class="col-12">
                             <div class="form-group">
-                                <textarea class="form-control w-100" cols="30" rows="9" placeholder="@Localizer["Enter Message"]"></textarea>
+                                <textarea id="MsgContent" class="form-control w-100" cols="30" rows="9" placeholder="@Localizer["Enter Message"]"></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="form-group mt-lg-3">
-                        <button type="submit" class="primary_btn">@Localizer["Send Message"]</button>
+                        <button type="submit" class="primary_btn button-contactForm">@Localizer["Send Message"]</button>
                     </div>
                 </form>
             </div>
@@ -74,22 +73,20 @@
                 <div class="media contact-info">
                     <span class="contact-info__icon"><i class="fas fa-home"></i></span>
                     <div class="media-body">
-                        <h3>Buttonwood, California.</h3>
-                        <p>Rosemead, CA 91770</p>
+                        <h3>@Model.Dossier.Address</h3>
                     </div>
                 </div>
                 <div class="media contact-info">
                     <span class="contact-info__icon"><i class="fas fa-mobile-alt"></i></span>
                     <div class="media-body">
-                        <h3><a href="tel:454545654">00 (440) 9865 562</a></h3>
-                        <p>Mon to Fri 9am to 6pm</p>
+                        <h3><a href="tel:@Model.Dossier.PhoneNumber">@Model.Dossier.PhoneNumber</a></h3>
                     </div>
                 </div>
                 <div class="media contact-info">
                     <span class="contact-info__icon"><i class="fas fa-envelope"></i></span>
                     <div class="media-body">
-                        <h3><a href="mailto:support@colorlib.com">support@colorlib.com</a></h3>
-                        <p>Send us your query anytime!</p>
+                        <h3><a href="mailto:@Model.Dossier.Email">@Model.Dossier.Email</a></h3>
+                        <p>@Localizer["Send me your query anytime!"]</p>
                     </div>
                 </div>
             </div>
@@ -97,3 +94,34 @@
     </div>
 </section>
 <!-- ================ contact section end ================= -->
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $("#MsgForm").submit(function (e) {
+            e.preventDefault();
+            var authorName = $('#AuthorName').val();
+            var authorEmail = $('#AuthorEmail').val();
+            var msgSubject = $('#MsgSubject').val();
+            var msgContent = $('#MsgContent').val();
+            $.ajax({
+                type: "POST",
+                url: "/Contact?handler=Message",
+                data: {
+                    authorName: authorName,
+                    authorEmail: authorEmail,
+                    msgSubject: msgSubject,
+                    msgContent: msgContent
+                },
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("XSRF-TOKEN",
+                        $('input:hidden[name="__RequestVerificationToken"]').val());
+                },
+                success: function (result) {
+                    $('#MsgForm').trigger("reset");
+                    alert(result);
+                }
+            });
+        });
+    </script>
+}

@@ -13,9 +13,11 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Sh.Domain.Entities.UserModel;
+using Sh.Domain.Interfaces;
 using Sh.Domain.Interfaces.Repositories;
 using Sh.Infrastructure.Data;
 using Sh.Infrastructure.Repositories;
+using Sh.Infrastructure.Services;
 using Sh.Web.Pages.Utils;
 using Sh.Web.Resources;
 using Sh.Web.ViewComponents;
@@ -59,6 +61,7 @@ namespace Sh.Web
                 new MySqlServerVersion(new Version(8, 0, 11))
                 ).UseLazyLoadingProxies());
 
+            services.AddTransient<IEmailService, EmailService>();
             services.AddScoped<IRepository, Repository>();
             services.AddScoped<IBlogRepository, BlogRepository>();
             services.AddScoped<IGalleryRepository, GalleryRepository>();
@@ -78,6 +81,7 @@ namespace Sh.Web
 
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<ImageHelper>();
+            services.AddScoped<PDFFileHelper>();
             services.AddRazorPages()
                 .AddViewLocalization()
                 .AddDataAnnotationsLocalization(options =>

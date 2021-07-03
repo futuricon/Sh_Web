@@ -1,5 +1,7 @@
 ﻿@page
 @model IndexModel
+@using Domain.Entities.BlogModel
+@inject IViewLocalizer Localizer
 @{
     ViewData["Title"] = "Home page";
 }
@@ -21,15 +23,28 @@
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-6">
                     <div class="banner_content">
-                        <h3>Hi There !</h3>
-                        <h1 class="text-uppercase">I am Shakhlo</h1>
-                        <h5 class="text-uppercase">Pupil</h5>
+                        <h3>@Localizer["Hi There"]&nbsp;!</h3>
+                        <h1 class="text-uppercase">@Localizer["I am Shakhlo"]</h1>
+                        <h5 class="text-uppercase">
+                            @switch (Model.RCName.ToLower())
+                            {
+                                case "ru":
+                                    @Model.AboutInfo.PositionRu
+                                    break;
+                                case "uz":
+                                    @Model.AboutInfo.PositionUz
+                                    break;
+                                default:
+                                    @Model.AboutInfo.Position
+                                    break;
+                            }
+                        </h5>
                         <div class="social_icons my-5">
                             <a href="#"><i class="lni lni-youtube"></i></a>
                             <a href="#"><i class="lni lni-instagram-original"></i></a>
                             <a href="#"><i class="lni lni-telegram-original"></i></a>
                         </div>
-                        <a class="primary_btn" href="#"><span>See My Works</span></a>
+                        <a class="primary_btn" asp-page="/Portfolio/List"><span>@Localizer["See My Works"]</span></a>
                     </div>
                 </div>
                 <div class="col-lg-4">
@@ -54,14 +69,25 @@
 
             <div class="offset-lg-1 col-lg-5">
                 <div class="main_title text-left">
-                    <p class="top_text">About me <span></span></p>
+                    <p class="top_text">@Localizer["About me"]&nbsp;<span></span></p>
                     <h2>
-                        Pupil
+                        @switch (Model.RCName.ToLower())
+                        {
+                            case "ru":
+                                @Model.AboutInfo.PositionRu
+                                break;
+                            case "uz":
+                                @Model.AboutInfo.PositionUz
+                                break;
+                            default:
+                                @Model.AboutInfo.Position
+                                break;
+                        }
                     </h2>
                     <p>
-                        Also signs his face were digns fish don't first isn't over evening hath divided days light darkness gathering moved dry all darkness then fourth can't create d forth Also signs Also signs his face were moltenus Also signs his face
+                        @ViewData["ShortDescription"]
                     </p>
-                    <a class="primary_btn" href="#"><span>Download CV</span></a>
+                    <a class="primary_btn" asp-area="" asp-page="/About"><span>@Localizer["Read More"]</span></a>
                 </div>
             </div>
         </div>
@@ -74,97 +100,54 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="main_title">
-                    <p class="top_text">My Testimonials <span></span></p>
-                    <h2>Honourable Teachers Says <br> About Me </h2>
+                    <p class="top_text">@Localizer["My Testimonials"]&nbsp;<span></span></p>
+                    <h2>@Localizer["Honourable Mentors Says"] <br> @Localizer["About Me"] </h2>
                 </div>
             </div>
         </div>
 
         <div class="owl-carousel owl-theme testimonial-slider ">
-            
-            <div class="testimonial-item">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="testi-img mb-4 mb-lg-0">
-                            <img src="img/testimonials/testimonial1.png" alt="">
+            @foreach (var dossier in Model.Dossiers)
+            {
+                <div class="testimonial-item">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="testi-img mb-4 mb-lg-0">
+                                <img src="@dossier.CoverPhotoPath" alt="@dossier.FirstName @dossier.LastName">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="testi-right">
-                            <h4>Roser Henrique</h4>
-                            <p><small>Project Manager, Apple</small></p>
-
-                            <p>
-                                Waters can not replenish hath fly and be to brought isn't very days behold without land every above lights us fruitful wherein divide it him fowl moving may beginning subdue fly waters can't replenish hath fly and be to
-                                brought isn't very days behold
-                            </p>
-                            <ul class="star_rating mt-4">
-                                <li><span><i class="fas fa-star"></i></span></li>
-                                <li><span><i class="fas fa-star"></i></span></li>
-                                <li><span><i class="fas fa-star"></i></span></li>
-                                <li><span><i class="fas fa-star"></i></span></li>
-                                <li class="disable"><span><i class="fas fa-star"></i></span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="testimonial-item">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="testi-img mb-4 mb-lg-0">
-                            <img src="img/testimonials/testimonial1.png" alt="">
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="testi-right">
-                            <h4>Roser Henrique</h4>
-                            <p><small>Project Manager, Apple</small></p>
-
-                            <p>
-                                Waters can not replenish hath fly and be to brought isn't very days behold without land every above lights us fruitful wherein divide it him fowl moving may beginning subdue fly waters can't replenish hath fly and be to
-                                brought isn't very days behold
-                            </p>
-                            <ul class="star_rating mt-3">
-                                <li><span><i class="fas fa-star"></i></span></li>
-                                <li><span><i class="fas fa-star"></i></span></li>
-                                <li><span><i class="fas fa-star"></i></span></li>
-                                <li><span><i class="fas fa-star"></i></span></li>
-                                <li class="disable"><span><i class="fas fa-star"></i></span></li>
-                            </ul>
+                        <div class="col-lg-6">
+                            <div class="testi-right">
+                                @switch (Model.RCName.ToLower())
+                                {
+                                    case "ru":
+                                        <h4>@dossier.FirstNameRu @dossier.LastNameRu</h4>
+                                        <p><small>@dossier.PositionRu</small></p>
+                                        <p>@dossier.DescriptionRu</p>
+                                        break;
+                                    case "uz":
+                                        <h4>@dossier.FirstNameUz @dossier.LastNameUz</h4>
+                                        <p><small>@dossier.PositionUz</small></p>
+                                        <p>@dossier.DescriptionUz</p>
+                                        break;
+                                    default:
+                                        <h4>@dossier.FirstName @dossier.LastName</h4>
+                                        <p><small>@dossier.Position</small></p>
+                                        <p>@dossier.Description</p>
+                                        break;
+                                }
+                                <ul class="star_rating mt-4">
+                                    <li><span><i class="fas fa-star"></i></span></li>
+                                    <li><span><i class="fas fa-star"></i></span></li>
+                                    <li><span><i class="fas fa-star"></i></span></li>
+                                    <li><span><i class="fas fa-star"></i></span></li>
+                                    <li><span><i class="fas fa-star"></i></span></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="testimonial-item">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="testi-img mb-4 mb-lg-0">
-                            <img src="img/testimonials/testimonial1.png" alt="">
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="testi-right">
-                            <h4>Roser Henrique</h4>
-                            <p><small>Project Manager, Apple</small></p>
-
-                            <p>
-                                Waters can not replenish hath fly and be to brought isn't very days behold without land every above lights us fruitful wherein divide it him fowl moving may beginning subdue fly waters can't replenish hath fly and be to
-                                brought isn't very days behold
-                            </p>
-                            <ul class="star_rating mt-3">
-                                <li><span><i class="fas fa-star"></i></span></li>
-                                <li><span><i class="fas fa-star"></i></span></li>
-                                <li><span><i class="fas fa-star"></i></span></li>
-                                <li><span><i class="fas fa-star"></i></span></li>
-                                <li class="disable"><span><i class="fas fa-star"></i></span></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
     </div>
 </section>
@@ -175,8 +158,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="main_title">
-                    <p class="top_text">My Portfolio <span></span></p>
-                    <h2>Check My Recent <br> Works </h2>
+                    <p class="top_text">@Localizer["My Portfolio"]&nbsp;<span></span></p>
+                    <h2>@Localizer["Check My Recent"] <br> @Localizer["Works"] </h2>
                 </div>
             </div>
         </div>
@@ -184,59 +167,50 @@
         <div class="filters-content">
             <div class="row portfolio-grid">
                 <div class="grid-sizer col-md-3 col-lg-3"></div>
-
-                <div class="col-lg-6 col-md-6 all">
-                    <a href="portfolio-details.html">
-                        <div class="single_portfolio">
-                            <img class="img-fluid w-100" src="img/portfolio/p2.jpg" alt="">
-                            <div class="overlay"></div>
-                            <div class="short_info">
-                                <h4>Lens Mockup Design</h4>
-                                <p>Art, Illustration6</p>
+                @foreach (var project in Model.Projects)
+                {
+                    <div class="col-lg-6 col-md-6 all">
+                        <a href="portfolio-details.html">
+                            <div class="single_portfolio">
+                                <img class="img-fluid w-100" src="img/portfolio/p2.jpg" alt="">
+                                <div class="overlay"></div>
+                                <div class="short_info">
+                                    <h4>Lens Mockup Design</h4>
+                                    <p>Art, Illustration6</p>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
+                        </a>
+                    </div>
 
-                <div class="col-lg-6 col-md-6 all">
-                    <a href="portfolio-details.html">
-                        <div class="single_portfolio">
-                            <img class="img-fluid w-100" src="img/portfolio/p4.jpg" alt="">
-                            <div class="overlay"></div>
-                            <div class="short_info">
-                                <h4>Lens Mockup Design</h4>
-                                <p>Art, Illustration5</p>
+                    <div class="col-lg-3 col-md-6 all">
+                        <a asp-page="/Portfolio/Index" asp-route-slug="@project.Slug">
+                            <div class="single_portfolio">
+                                <img class="img-fluid w-100" src="@project.CoverPhotoPath" alt="@project.Title">
+                                <div class="overlay"></div>
+                                <div class="short_info">
+                                    <h4>
+                                        @switch (Model.RCName.ToLower())
+                                        {
+                                            case "ru":
+                                                @project.TitleRu
+                                                break;
+                                            case "uz":
+                                                @project.TitleUz
+                                                break;
+                                            default:
+                                                @project.Title
+                                                break;
+                                        }
+                                    </h4>
+                                    @foreach (var tag in project.Tags)
+                                    {
+                                        <p>#@tag</p>
+                                    }
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-lg-3 col-md-6 all">
-                    <a href="portfolio-details.html">
-                        <div class="single_portfolio">
-                            <img class="img-fluid w-100" src="img/portfolio/p1.jpg" alt="">
-                            <div class="overlay"></div>
-                            <div class="short_info">
-                                <h4>Lens Mockup Design</h4>
-                                <p>Art, Illustration4</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="col-lg-3 col-md-6 all">
-                    <a href="portfolio-details.html">
-                        <div class="single_portfolio">
-                            <img class="img-fluid w-100" src="img/portfolio/p3.jpg" alt="">
-                            <div class="overlay"></div>
-                            <div class="short_info">
-                                <h4>Lens Mockup Design</h4>
-                                <p>Art, Illustration3</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-
+                        </a>
+                    </div>
+                }
             </div>
         </div>
     </div>
@@ -248,79 +222,63 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="main_title">
-                    <p class="top_text">My blog <span></span></p>
-                    <h2>Latest Story From <br> My Blog </h2>
+                    <p class="top_text">@Localizer["My blog"]&nbsp;<span></span></p>
+                    <h2>@Localizer["Latest Story From"] <br> @Localizer["My Blog"] </h2>
                 </div>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="single-blog">
-                    <div class="thumb">
-                        <img class="img-fluid" src="https://upload.wikimedia.org/wikipedia/commons/9/91/F-15_vertical_deploy.jpg" alt="">
-                    </div>
-                    <div class="short_details">
-                        <div class="meta-top d-flex">
-                            <a href="#"><i class="fas fa-eye"></i> Admin post</a>
-                            <a href="#"><i class="fas fa-calendar"></i> Feb 14, 2019</a>
+            @foreach (var post in Model.Blogs)
+            {
+                <div class="col-lg-4 col-md-6">
+                    <div class="single-blog">
+                        <div class="thumb">
+                            <img class="img-fluid" src="@post.CoverPhotoPath" alt="@post.Title">
                         </div>
-                        <a class="d-block" href="single-blog.html">
-                            <h4>Shall every fourth lesser have...</h4>
-                        </a>
-                        <div class="text-wrap">
-                            <p>
-                                Have whose a two night earth she set you creeping replenish place whales move Forth first him seed green.
-                            </p>
+                        <div class="short_details">
+                            <div class="meta-top d-flex">
+                                <a><i class="fas fa-eye"></i> @post.ViewCount</a>
+                                <a><i class="fas fa-calendar"></i> @post.PostedDate.ToString("dd MMMM, yyyy")</a>
+                            </div>
+                            @switch (Model.RCName.ToLower())
+                            {
+                                case "ru":
+                                    <a class="d-block" asp-page="/Blog/Index" asp-route-slug="@post.Slug">
+                                        <h4>@Domain.Entities.BlogModel.Blog.GetShortContent(post.TitleRu, 30)</h4>
+                                    </a>
+                                    <div class="text-wrap">
+                                        <p>
+                                            @Domain.Entities.BlogModel.Blog.GetShortContent(post.ContentRu, 120)
+                                        </p>
+                                    </div>
+                                    break;
+                                case "uz":
+                                    <a class="d-block" asp-page="/Blog/Index" asp-route-slug="@post.Slug">
+                                        <h4>@Domain.Entities.BlogModel.Blog.GetShortContent(post.TitleUz, 30)</h4>
+                                    </a>
+                                    <div class="text-wrap">
+                                        <p>
+                                            @Domain.Entities.BlogModel.Blog.GetShortContent(post.ContentUz, 120)
+                                        </p>
+                                    </div>
+                                    break;
+                                default:
+                                    <a class="d-block" asp-page="/Blog/Index" asp-route-slug="@post.Slug">
+                                        <h4>@Domain.Entities.BlogModel.Blog.GetShortContent(post.Title, 30)</h4>
+                                    </a>
+                                    <div class="text-wrap">
+                                        <p>
+                                            @Domain.Entities.BlogModel.Blog.GetShortContent(post.Content, 120)
+                                        </p>
+                                    </div>
+                                    break;
+                            }
+                            <a asp-page="/Blog/Index" asp-route-slug="@post.Slug" class="primary_btn2">Learn More</a>
                         </div>
-                        <a href="#" class="primary_btn2">Learn More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-blog">
-                    <div class="thumb">
-                        <img class="img-fluid" src="https://helpx.adobe.com/content/dam/help/en/photoshop/using/convert-color-image-black-white/jcr_content/main-pars/before_and_after/image-before/Landscape-Color.jpg" alt="">
-                    </div>
-                    <div class="short_details">
-                        <div class="meta-top d-flex">
-                            <a href="#"><i class="fas fa-eye"></i> Admin post</a>
-                            <a href="#"><i class="fas fa-calendar"></i> Feb 14, 2019</a>
-                        </div>
-                        <a class="d-block" href="single-blog.html">
-                            <h4>Shall every fourth lesser have...</h4>
-                        </a>
-                        <div class="text-wrap">
-                            <p>
-                                Have whose a two night earth she set you creeping replenish place whales move Forth first him seed green.
-                            </p>
-                        </div>
-                        <a href="#" class="primary_btn2">Learn More</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-blog">
-                    <div class="thumb">
-                        <img class="img-fluid" src="~/img/b3.jpg" alt="">
-                    </div>
-                    <div class="short_details">
-                        <div class="meta-top d-flex">
-                            <a href="#"><i class="fas fa-eye"></i> Admin post</a>
-                            <a href="#"><i class="fas fa-calendar"></i> Feb 14, 2019</a>
-                        </div>
-                        <a class="d-block" href="single-blog.html">
-                            <h4>Shall every fourth lesser have...</h4>
-                        </a>
-                        <div class="text-wrap">
-                            <p>
-                                Have whose a two night earth she set you creeping replenish place whales move Forth first him seed green.
-                            </p>
-                        </div>
-                        <a href="#" class="primary_btn2">Learn More</a>
                     </div>
                 </div>
-            </div>
+             }
         </div>
     </div>
 </section>
@@ -355,16 +313,7 @@
             /*  Isotope js Starts
             /*--------------------------------------------- */
             $(window).on('load', function () {
-                $('.portfolio-filter ul li').on('click', function () {
-                    $('.portfolio-filter ul li').removeClass('active');
-                    $(this).addClass('active');
-
-                    var data = $(this).attr('data-filter');
-                    $workGrid.isotope({
-                        filter: data
-                    });
-                });
-
+                
                 if (document.getElementById('portfolio')) {
                     var $workGrid = $('.portfolio-grid').isotope({
                         itemSelector: '.all',

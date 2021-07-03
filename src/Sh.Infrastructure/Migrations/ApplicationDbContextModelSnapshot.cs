@@ -243,6 +243,10 @@ namespace Sh.Infrastructure.Migrations
                         .HasMaxLength(32)
                         .HasColumnType("varchar(32)");
 
+                    b.Property<string>("Address")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
                     b.Property<string>("CVFilePath")
                         .HasColumnType("longtext");
 
@@ -264,6 +268,10 @@ namespace Sh.Infrastructure.Migrations
                         .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -298,6 +306,10 @@ namespace Sh.Infrastructure.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("varchar(30)");
 
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
                     b.Property<string>("Position")
                         .IsRequired()
                         .HasMaxLength(80)
@@ -320,21 +332,25 @@ namespace Sh.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "20210701184638119172",
+                            Id = "20210703041812112353",
+                            Address = "some address",
+                            CVFilePath = "",
                             CoverPhotoPath = "",
-                            Description = "",
-                            DescriptionRu = "",
-                            DescriptionUz = "",
+                            Description = "test",
+                            DescriptionRu = "тест",
+                            DescriptionUz = "test",
+                            Email = "test@mail.com",
                             FirstName = "Shakhlo",
                             FirstNameRu = "Шахло",
                             FirstNameUz = "Shaxlo",
                             IsAboutInfo = true,
-                            LastName = "Shakespeare",
-                            LastNameRu = "Shakespeare",
-                            LastNameUz = "Shakespeare",
-                            Position = "",
-                            PositionRu = "",
-                            PositionUz = ""
+                            LastName = "Ergasheva",
+                            LastNameRu = "Эргашева",
+                            LastNameUz = "Ergasheva",
+                            PhoneNumber = "+998908007060",
+                            Position = "Pupil",
+                            PositionRu = "Ученица",
+                            PositionUz = "O'quvchi"
                         });
                 });
 

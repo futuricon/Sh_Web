@@ -9,7 +9,7 @@ using Sh.Infrastructure.Data;
 namespace Sh.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210701074552_init1")]
+    [Migration("20210702231813_init1")]
     partial class init1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -239,6 +239,123 @@ namespace Sh.Infrastructure.Migrations
                     b.ToTable("Tag");
                 });
 
+            modelBuilder.Entity("Sh.Domain.Entities.DossierModel.Dossier", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(32)
+                        .HasColumnType("varchar(32)");
+
+                    b.Property<string>("Address")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("CVFilePath")
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("CoverPhotoPath")
+                        .HasMaxLength(64)
+                        .HasColumnType("varchar(64)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<string>("DescriptionRu")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<string>("DescriptionUz")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<string>("FirstNameRu")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<string>("FirstNameUz")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<bool>("IsAboutInfo")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<string>("LastNameRu")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<string>("LastNameUz")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("varchar(30)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<string>("Position")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("varchar(80)");
+
+                    b.Property<string>("PositionRu")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("varchar(80)");
+
+                    b.Property<string>("PositionUz")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("varchar(80)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Dossier");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "20210703041812112353",
+                            Address = "some address",
+                            CVFilePath = "",
+                            CoverPhotoPath = "",
+                            Description = "test",
+                            DescriptionRu = "тест",
+                            DescriptionUz = "test",
+                            Email = "test@mail.com",
+                            FirstName = "Shakhlo",
+                            FirstNameRu = "Шахло",
+                            FirstNameUz = "Shaxlo",
+                            IsAboutInfo = true,
+                            LastName = "Ergasheva",
+                            LastNameRu = "Эргашева",
+                            LastNameUz = "Ergasheva",
+                            PhoneNumber = "+998908007060",
+                            Position = "Pupil",
+                            PositionRu = "Ученица",
+                            PositionUz = "O'quvchi"
+                        });
+                });
+
             modelBuilder.Entity("Sh.Domain.Entities.GalleryModel.Category", b =>
                 {
                     b.Property<string>("Id")
@@ -333,61 +450,6 @@ namespace Sh.Infrastructure.Migrations
                     b.HasIndex("AuthorId");
 
                     b.ToTable("Project");
-                });
-
-            modelBuilder.Entity("Sh.Domain.Entities.TestimonialModel.Testimonial", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasMaxLength(32)
-                        .HasColumnType("varchar(32)");
-
-                    b.Property<string>("CoverPhotoPath")
-                        .HasMaxLength(64)
-                        .HasColumnType("varchar(64)");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)");
-
-                    b.Property<string>("DescriptionRu")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)");
-
-                    b.Property<string>("DescriptionUz")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("varchar(200)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("varchar(30)");
-
-                    b.Property<string>("Position")
-                        .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("varchar(80)");
-
-                    b.Property<string>("PositionRu")
-                        .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("varchar(80)");
-
-                    b.Property<string>("PositionUz")
-                        .IsRequired()
-                        .HasMaxLength(80)
-                        .HasColumnType("varchar(80)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Testimonial");
                 });
 
             modelBuilder.Entity("Sh.Domain.Entities.UserModel.AppUser", b =>
