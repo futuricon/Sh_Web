@@ -14,7 +14,7 @@
     <div class="banner_inner d-flex align-items-center">
         <div class="container">
             <div class="banner_content text-center">
-                <h2>@Localizer["Edit this Testimonial"]"</h2>
+                <h2>@Localizer["Edit this Testimonial"]</h2>
                 <div class="page_link">
                     <a asp-area="" asp-page="/Index">@Localizer["Home"]</a>
                     <a asp-page="/About">@Localizer["About"]</a>
@@ -57,6 +57,26 @@
                     <label asp-for="Input.Dossier.LastName" class="control-label"></label>
                     <input asp-for="Input.Dossier.LastName" class="form-control" />
                     <span asp-validation-for="Input.Dossier.LastName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Dossier.FirstNameRu" class="control-label"></label>
+                    <input asp-for="Input.Dossier.FirstNameRu" class="form-control" />
+                    <span asp-validation-for="Input.Dossier.FirstNameRu" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Dossier.LastNameRu" class="control-label"></label>
+                    <input asp-for="Input.Dossier.LastNameRu" class="form-control" />
+                    <span asp-validation-for="Input.Dossier.LastNameRu" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Dossier.FirstNameUz" class="control-label"></label>
+                    <input asp-for="Input.Dossier.FirstNameUz" class="form-control" />
+                    <span asp-validation-for="Input.Dossier.FirstNameUz" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Dossier.LastNameUz" class="control-label"></label>
+                    <input asp-for="Input.Dossier.LastNameUz" class="form-control" />
+                    <span asp-validation-for="Input.Dossier.LastNameUz" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Input.Dossier.Position" class="control-label"></label>
@@ -105,7 +125,7 @@
                         <input type="email" asp-for="Input.Dossier.Email" class="form-control" />
                         <span asp-validation-for="Input.Dossier.Email" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group mt-35">
                         <a class="action_btn rounded-0 primary-bg text-white mb-30 file-btn">
                             <span id="file_name">@Localizer["Choose a CV File"]</span>
                             <input id="uploadInput" type="file" asp-for="Input.UploadCVFile" onchange="readCVFile(this);" value="Choose a file" accept="application/pdf" />

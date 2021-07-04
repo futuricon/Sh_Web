@@ -1,0 +1,52 @@
+﻿/*Template*/
+
+.temp_area {
+    position: relative
+}
+
+    .temp_area .main_title {
+        margin-bottom: 0px
+    }
+
+        .temp_area .main_title p.top_text {
+            font-size: 20px;
+        }
+
+    .temp_area h2 {
+        margin-bottom: 30px
+    }
+
+    .temp_area h4 {
+        font-size: 20px;
+        color: #797979;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+@media (max-width: 991px) {
+    .temp_area h2 {
+        margin-bottom: 20px
+    }
+
+    .temp_area h4 {
+        margin-top: 10px;
+    }
+}
+
+.temp_area .primary_btn {
+    margin-top: 40px
+}
+
+@media (max-width: 991px) {
+    .temp_area .primary_btn {
+        margin-top: 20px
+    }
+}
+
+.mt-sm-50 {
+    margin-top: 50px;
+}
+
+.temp_area code {
+    font-size: 130%;
+}

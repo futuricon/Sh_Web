@@ -491,6 +491,11 @@ button.primary_btn {
     padding-top: 197px
 }
 
+    .home_banner_area .banner_inner .home_right_img img {
+        max-width: 80%;
+        height: auto;
+    }
+
 @media (max-width: 991px) {
     .home_banner_area .banner_inner .home_right_img {
         display: none

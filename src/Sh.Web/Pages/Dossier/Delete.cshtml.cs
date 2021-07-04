@@ -35,6 +35,10 @@ namespace Sh.Web.Pages.Dossier
             {
                 return NotFound();
             }
+            if (Dossier.IsAboutInfo == true)
+            {
+                return NotFound();
+            }
             return Page();
         }
 

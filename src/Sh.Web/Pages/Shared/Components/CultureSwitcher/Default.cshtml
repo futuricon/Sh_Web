@@ -9,13 +9,13 @@
 </il>
 
 <li class="nav-item submenu dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@(Model.CurrentUICulture.Name)</a>
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@(Model.CurrentUICulture.NativeName)</a>
     <ul class="dropdown-menu">
         @foreach (var culture in Model.SupportedCultures)
         {
             if (Model.CurrentUICulture.Name != culture.Name)
             {
-                <li class="nav-item"><a class="nav-link culture-options">@culture.Name</a></li>
+                <li class="nav-item"><a class="nav-link culture-options" onclick="SetCulture('@culture.Name')">@culture.NativeName</a></li>
             }
         }
     </ul>
@@ -43,13 +43,13 @@
 
 
     <script>
-        var items = document.getElementsByClassName('culture-options');
-        for (var i = 0; i < items.length; i++) {
-            items[i].addEventListener('click', printDetails);
-        }
+        //var items = document.getElementsByClassName('culture-options');
+        //for (var i = 0; i < items.length; i++) {
+        //    items[i].addEventListener('click', printDetails);
+        //}
 
-        function printDetails(e) {
-            document.getElementById("culture-selected").value = this.text;
+        function SetCulture(culture) {
+            document.getElementById("culture-selected").value = culture;
             document.getElementById("culture-switcher").submit();
         }
     </script>

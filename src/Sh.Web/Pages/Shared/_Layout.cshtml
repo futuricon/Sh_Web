@@ -1,4 +1,5 @@
-﻿@{ 
+﻿@inject IViewLocalizer Localizer
+@{
     string setClass = ViewData["PageName"] == null ? "header_inner_page" : "";
 }
 <!DOCTYPE html>
@@ -42,12 +43,12 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav">
-                            <li class="nav-item"><a is-active-page class="nav-link" asp-area="" asp-page="/Index">Home</a></li>
-                            <li class="nav-item"><a is-active-page class="nav-link" asp-area="" asp-page="/About">About</a></li>
-                            <li class="nav-item"><a is-active-page class="nav-link" asp-page="/Portfolio/List">Portfolio</a></li>
-                            <li class="nav-item"><a is-active-page class="nav-link" asp-page="/Blog/List">Blog</a></li>
-                            <li class="nav-item"><a is-active-page class="nav-link" asp-page="/Gallery/Index">Gallery</a></li>
-                            <li class="nav-item"><a is-active-page class="nav-link" asp-area="" asp-page="/Contact">Contacts</a></li>
+                            <li class="nav-item"><a is-active-page class="nav-link" asp-area="" asp-page="/Index">@Localizer["Home"]</a></li>
+                            <li class="nav-item"><a is-active-page class="nav-link" asp-area="" asp-page="/About">@Localizer["About"]</a></li>
+                            <li class="nav-item"><a is-active-page class="nav-link" asp-page="/Portfolio/List">@Localizer["Portfolio"]</a></li>
+                            <li class="nav-item"><a is-active-page class="nav-link" asp-page="/Blog/List">@Localizer["Blog"]</a></li>
+                            <li class="nav-item"><a is-active-page class="nav-link" asp-page="/Gallery/Index">@Localizer["Gallery"]</a></li>
+                            <li class="nav-item"><a is-active-page class="nav-link" asp-area="" asp-page="/Contact">@Localizer["Contacts"]</a></li>
                             <vc:culture-switcher />
                             <partial name="_LoginPartial" />
                         </ul>
@@ -76,13 +77,13 @@
                                 <nav class="navbar navbar-expand-lg navbar-light justify-content-center">
                                     <div class="collapse navbar-collapse offset">
                                         <ul class="nav navbar-nav menu_nav mx-auto">
-                                            <li class="nav-item"><a class="nav-link text-white" asp-page="/Index">Home</a></li>
-                                            <li class="nav-item"><a class="nav-link text-white" asp-page="/About">About</a></li>
-                                            <li class="nav-item"><a class="nav-link text-white" asp-page="/Portfolio/List">Portfolio</a></li>
-                                            <li class="nav-item"><a class="nav-link text-white" asp-page="/BLog/List">BLog</a></li>
-                                            <li class="nav-item"><a class="nav-link text-white" asp-page="/Gellery/Index">Gellery</a></li>
-                                            <li class="nav-item"><a class="nav-link text-white" asp-page="/Contact">Contacts</a></li>
-                                            <li class="nav-item"><a class="nav-link text-white" asp-page="/Privacy">Privacy</a></li>
+                                            <li class="nav-item"><a class="nav-link text-white" asp-page="/Index">@Localizer["Home"]</a></li>
+                                            <li class="nav-item"><a class="nav-link text-white" asp-page="/About">@Localizer["About"]</a></li>
+                                            <li class="nav-item"><a class="nav-link text-white" asp-page="/Portfolio/List">@Localizer["Portfolio"]</a></li>
+                                            <li class="nav-item"><a class="nav-link text-white" asp-page="/BLog/List">@Localizer["BLog"]</a></li>
+                                            <li class="nav-item"><a class="nav-link text-white" asp-page="/Gellery/Index">@Localizer["Gellery"]</a></li>
+                                            <li class="nav-item"><a class="nav-link text-white" asp-page="/Contact">@Localizer["Contacts"]</a></li>
+                                            <li class="nav-item"><a class="nav-link text-white" asp-page="/Privacy">@Localizer["Privacy"]</a></li>
                                         </ul>
                                     </div>
                                 </nav>

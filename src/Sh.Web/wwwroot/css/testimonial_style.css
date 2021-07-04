@@ -66,7 +66,7 @@
 
 .testimonial-slider .owl-item img {
     width: 200px !important;
-    height: 225px;
+    height: auto;
     margin-right: auto;
     margin-left: auto;
     border-radius: 0 40px 0 40px;

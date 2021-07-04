@@ -1,8 +1,29 @@
 ﻿@page
 @model PrivacyModel
+@inject IViewLocalizer Localizer
 @{
     ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+@section CSS{
+    <link rel="stylesheet" href="~/css/contact_style.css" />
+}
+
+<!--================ Start Temp Area =================-->
+<section class="temp_area section_gap">
+    <div class="container">
+        <div class="row justify-content-start align-items-center">
+
+            <div class="col-lg-6 mt-sm-50 mx-auto text-center">
+                <div class="main_title">
+                    <p class="top_text">@Localizer["Privacy Policy"]&nbsp;<span></span></p>
+                    <h4>
+                        some privacy
+                    </h4>
+                    <a class="primary_btn" asp-area="" asp-page="/Index"><span>@Localizer["Home"]</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--================ End Temp Area =================-->

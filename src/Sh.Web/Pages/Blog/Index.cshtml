@@ -43,14 +43,7 @@
                 }
                 <div class="single-post">
                     <div class="feature-img">
-                        @if (!string.IsNullOrEmpty(Model.Blog.CoverPhotoPath))
-                        {
-                            <img class="img-fluid" src="@Model.Blog.CoverPhotoPath" alt="@Model.Blog.Title">
-                        }
-                        else
-                        {
-                            <img class="img-fluid" src="~/img/blog_image.png" alt="Blog Cover Image">
-                        }
+                        <img class="img-fluid" src="@Model.Blog.CoverPhotoPath" alt="@Model.Blog.Title">
                     </div>
                     <div class="blog_details">
                         <h2>@ViewData["BlogTitle"]</h2>
@@ -98,16 +91,9 @@
                         @foreach (var article in Model.PopularArticles)
                         {
                             <div class="media post_item">
-                                @if (!string.IsNullOrEmpty(article.CoverPhotoPath)) 
-                                {
-                                    <div class="post_item_img">
-                                        <img src="@article.CoverPhotoPath" alt="@article.Title">
-                                    </div>
-                                }
-                                else
-                                {
+                                <div class="post_item_img">
                                     <img src="@article.CoverPhotoPath" alt="@article.Title">
-                                }
+                                </div>
                                 <div class="media-body">
                                     <a asp-page="/Blog/Index" asp-route-slug="@article.Slug">
                                         @switch (Model.RCName.ToLower())

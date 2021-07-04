@@ -58,6 +58,10 @@ namespace Sh.Web.Pages.Dossier
             var dossier = await _dossiersRepository.GetByIdAsync<Domain.Entities.DossierModel.Dossier>(Input.Dossier.Id);
             dossier.FirstName = Input.Dossier.FirstName;
             dossier.LastName = Input.Dossier.LastName;
+            dossier.FirstNameRu = Input.Dossier.FirstNameRu;
+            dossier.LastNameRu = Input.Dossier.LastNameRu;
+            dossier.FirstNameUz = Input.Dossier.FirstNameUz;
+            dossier.LastNameUz = Input.Dossier.LastNameUz;
             dossier.Position = Input.Dossier.Position;
             dossier.PositionRu = Input.Dossier.PositionRu;
             dossier.PositionUz = Input.Dossier.PositionUz;

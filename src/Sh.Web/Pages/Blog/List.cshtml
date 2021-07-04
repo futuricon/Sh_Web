@@ -14,7 +14,7 @@
     <div class="banner_inner d-flex align-items-center">
         <div class="container">
             <div class="banner_content text-center">
-                <h2>@Localizer["Blog"]</h2>
+                <h2>@Localizer["My Blog"]</h2>
                 <div class="page_link">
                     <a asp-area="" asp-page="/Index">@Localizer["Home"]</a>
                     <a asp-page="/Blog/List">@Localizer["Blog"]</a>
@@ -36,7 +36,7 @@
                     }
                     @if (!Model.Blogs.Any())
                     {
-                        <h2>@Localizer["There are no any Posts yet"] :D</h2>
+                        <h2>@Localizer["Empty"] :D</h2>
                     }
                     else
                     {
@@ -44,14 +44,8 @@
                         {
                             <article class="blog_item">
                                 <div class="blog_item_img">
-                                    @if (!string.IsNullOrEmpty(post.CoverPhotoPath))
-                                    {
-                                        <img class="card-img rounded-0" src="@post.CoverPhotoPath" alt="@post.Title">
-                                    }
-                                    else
-                                    {
-                                        <img class="card-img rounded-0" src="~/img/blog_image.png" alt="default cover photo" />
-                                    }
+                                    <img class="card-img rounded-0" src="@post.CoverPhotoPath" alt="@post.Title">
+                                    
                                     <a asp-page="/Blog/Index" asp-route-slug="@post.Slug" class="blog_item_date">
                                         <h3>@post.PostedDate.ToString("dd")</h3>
                                         <p>@post.PostedDate.ToString("MMM")</p>
@@ -116,19 +110,10 @@
                         {
                             <div class="media post_item">
                                 
-                                @if (!string.IsNullOrEmpty(article.CoverPhotoPath)) 
-                                { 
-                                    <div class="post_item_img">
-                                        <img src="@article.CoverPhotoPath" alt="@article.Title">
-                                    </div>
+                                <div class="post_item_img">
+                                    <img src="@article.CoverPhotoPath" alt="@article.Title">
+                                </div>
                                     
-                                }
-                                else
-                                {
-                                    <div class="post_item_img">
-                                        <img src="~/img/blog_image.png" alt="Blog Cover Image">
-                                    </div>
-                                }
                                 <div class="media-body">
                                     <a asp-page="/Blog/Index" asp-route-slug="@article.Slug">
                                         @switch (Model.RCName.ToLower())
