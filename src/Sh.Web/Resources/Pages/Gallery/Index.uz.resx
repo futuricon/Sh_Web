@@ -123,6 +123,12 @@
   <data name="Check My Photos &amp; Video" xml:space="preserve">
     <value>Suratlarim va videolarni baholang</value>
   </data>
+  <data name="Gallery" xml:space="preserve">
+    <value>Galereya</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Bosh Sahifa</value>
+  </data>
   <data name="korea" xml:space="preserve">
     <value>Koreya</value>
   </data>

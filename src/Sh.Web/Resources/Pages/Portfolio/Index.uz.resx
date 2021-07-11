@@ -120,6 +120,12 @@
   <data name="Completed" xml:space="preserve">
     <value>Bajarildi</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>Bosh Sahifa</value>
+  </data>
+  <data name="Portfolio" xml:space="preserve">
+    <value>Portfolio</value>
+  </data>
   <data name="Rating" xml:space="preserve">
     <value>Reyting</value>
   </data>

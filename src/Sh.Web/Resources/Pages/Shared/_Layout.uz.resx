@@ -144,6 +144,9 @@
   <data name="Portfolio" xml:space="preserve">
     <value>Portfolio</value>
   </data>
+  <data name="Privacy" xml:space="preserve">
+    <value>Maxfiylik</value>
+  </data>
   <data name="Request ID:" xml:space="preserve">
     <value>So'rov ID:</value>
   </data>

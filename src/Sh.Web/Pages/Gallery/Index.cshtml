@@ -7,11 +7,33 @@
 @{
     var token = antiforgery.GetAndStoreTokens(HttpContext).RequestToken;
 }
+
 @{
-    ViewData["Title"] = "Gallery";
+    ViewData["Title"] = Localizer["GalleryTitle"];
 }
 
-@section CSS {
+@section Head {
+    <meta name="author" content="@Localizer["AuthorFullName"]" />
+    <meta name="keywords" content="@Localizer["GalleryKeyWords"]" />
+    <meta name="description" content="@Localizer["GalleryDescription"]" />
+    <meta name="image" content="https://shakhlo.uz/img/favicon.png" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://shakhlo.uz/gallery" />
+    <meta property="og:title" content="@Localizer["GalleryTitle"]" />
+    <meta property="og:description" content="@Localizer["GalleryDescription"]" />
+    <meta property="og:image" content="https://shakhlo.uz/img/favicon.png" />
+
+    <meta name="twitter:card" content="@Localizer["GalleryCard"]" />
+    <meta name="twitter:url" content="https://shakhlo.uz/gallery" />
+    <meta name="twitter:title" content="@Localizer["GalleryTitle"]" />
+    <meta name="twitter:description" content="@Localizer["GalleryDescription"]" />
+    <meta name="twitter:creator" content="@Localizer["AuthorFullName"]" />
+    <meta name="twitter:image" content="https://shakhlo.uz/img/favicon.png" />
+}
+
+@section CSS{
+    <link rel="canonical" href="https://shakhlo.uz/gallery" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
     <link rel="stylesheet" href="~/css/gallery_style.css" />
 }

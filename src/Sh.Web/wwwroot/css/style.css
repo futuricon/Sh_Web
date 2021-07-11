@@ -455,11 +455,12 @@ button.primary_btn {
         background: #8034c3
     }
 }
-
+/*/img/banner/home-banner.jpg*/
 /*#region BANNER CSS*/
 .home_banner_area {
-    background: url(../img/banner/home-banner.png) no-repeat top center;
-    background-position: center;
+    background-image: url(../img/home-banner.jpg);
+    background-repeat: no-repeat;
+    background-position: center top;
     background-size: cover;
     min-height: 890px
 }
@@ -580,7 +581,9 @@ button.primary_btn {
     overflow: hidden;
     width: 100%;
     min-height: 450px;
-    background: url(../img/banner/common-banner.png) no-repeat right bottom;
+    background-image: url(../img/common-banner.jpg);
+    background-repeat: no-repeat;
+    background-position: right bottom;
     background-size: cover;
     z-index: 1
 }

@@ -123,6 +123,12 @@
   <data name="Check My Photos &amp; Video" xml:space="preserve">
     <value>Оцените мои фото и видео</value>
   </data>
+  <data name="Gallery" xml:space="preserve">
+    <value>Галерея</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Главная</value>
+  </data>
   <data name="korea" xml:space="preserve">
     <value>корея</value>
   </data>

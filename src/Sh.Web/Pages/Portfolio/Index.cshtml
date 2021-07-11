@@ -3,8 +3,39 @@
 @model Sh.Web.Pages.Portfolio.IndexModel
 @inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Project";
 }
+
+@section Head {
+    @{
+        var imgUrl = $"https://shakhlo.uz{Model.Project.CoverPhotoPath}";
+        var projectUrl = $"https://shakhlo.uz/portfolio/{Model.Project.Slug}";
+        var projectTags = $"{Tag.ConvertTagsToString(Model.Project.Tags)}";
+    }
+
+    <meta name="author" content="@Localizer["AuthorFullName"]" />
+    <meta name="description" content="@ViewData["ProjectDesription"]" />
+    <meta name="keywords" content="@projectTags" />
+    <meta name="image" content="@imgUrl" />
+
+    <meta property="og:url" content="@projectUrl" />
+    <meta property="og:type" content="project" />
+    <meta property="og:title" content="@ViewData["ProjectTitle"]" />
+    <meta property="og:site_name" content="Shakhlo's Portfolio" />
+    <meta property="og:description" content="@ViewData["ProjectDesription"]" />
+    <meta property="og:image" content="@imgUrl" />
+
+    <meta property="article:published_time" content="@Model.Project.PostedDate.ToShortDateString()" />
+    <meta property="article:author" content="@Localizer["AuthorFullName"]" />
+    <meta property="article:tags" content="@projectTags" />
+
+    <meta name="twitter:title" content="@ViewData["ProjectTitle"]" />
+    <meta name="twitter:site" content="Shakhlo's Portfolio" />
+    <meta name="twitter:description" content="@ViewData["ProjectDesription"]" />
+    <meta name="twitter:creator" content="@Localizer["AuthorFullName"]" />
+    <meta name="twitter:image" content="@imgUrl" />
+}
+
 @section CSS {
     <link rel="stylesheet" href="~/css/portfolio_style.css" />
 }

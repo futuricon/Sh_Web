@@ -2,10 +2,29 @@
 @model Sh.Web.Pages.AboutModel
 @inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "About";
+    ViewData["Title"] = Localizer["AboutTitle"];
 }
+@section Head {
+    <meta name="author" content="@Localizer["AuthorFullName"]" />
+    <meta name="keywords" content="@Localizer["AboutKeyWords"]" />
+    <meta name="description" content="@Localizer["AboutDescription"]" />
+    <meta name="image" content="https://shakhlo.uz/img/favicon.png" />
 
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://shakhlo.uz/about" />
+    <meta property="og:title" content="@Localizer["AboutTitle"]" />
+    <meta property="og:description" content="@Localizer["AboutDescription"]" />
+    <meta property="og:image" content="https://shakhlo.uz/img/favicon.png" />
+
+    <meta name="twitter:card" content="@Localizer["AboutCard"]" />
+    <meta name="twitter:url" content="http://shakhlo.uz/about" />
+    <meta name="twitter:title" content="@Localizer["AboutTitle"]" />
+    <meta name="twitter:description" content="@Localizer["AboutDescription"]" />
+    <meta name="twitter:creator" content="@Localizer["AuthorFullName"]" />
+    <meta name="twitter:image" content="https://shakhlo.uz/img/favicon.png" />
+}
 @section CSS {
+    <link rel="canonical" href="https://shakhlo.uz/about" />
     <link rel="stylesheet" href="~/vendors/owl-carousel/owl.theme.default.min.css" />
     <link rel="stylesheet" href="~/vendors/owl-carousel/owl.carousel.min.css" />
     <link rel="stylesheet" href="~/css/about_style.css" />

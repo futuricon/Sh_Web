@@ -120,10 +120,16 @@
   <data name="Check My Recent Works" xml:space="preserve">
     <value>Оцените мои последние работы</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>Главная</value>
+  </data>
   <data name="Load More" xml:space="preserve">
     <value>Больше</value>
   </data>
   <data name="My Portfolio" xml:space="preserve">
     <value>Мое Портфолио</value>
+  </data>
+  <data name="Portfolio" xml:space="preserve">
+    <value>Портфолио</value>
   </data>
 </root>

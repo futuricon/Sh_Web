@@ -117,31 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Contact Me" xml:space="preserve">
-    <value>Свяжитесь со мной</value>
+  <data name="An error occurred while processing your request" xml:space="preserve">
+    <value>Sizning so'rovingizni ko'rib chiqishda xatolik yuz berdi</value>
   </data>
-  <data name="Contacts" xml:space="preserve">
-    <value>Контакты</value>
-  </data>
-  <data name="Enter email address" xml:space="preserve">
-    <value>Введите адрес электронной почты</value>
-  </data>
-  <data name="Enter Message" xml:space="preserve">
-    <value>Введите сообщение</value>
-  </data>
-  <data name="Enter Subject" xml:space="preserve">
-    <value>Введите тему</value>
-  </data>
-  <data name="Enter your name" xml:space="preserve">
-    <value>Введите ваше имя</value>
-  </data>
-  <data name="Get in Touch" xml:space="preserve">
-    <value>Связаться</value>
+  <data name="Error" xml:space="preserve">
+    <value>Xato</value>
   </data>
   <data name="Home" xml:space="preserve">
-    <value>Главная</value>
+    <value>Bosh Sahifa</value>
   </data>
-  <data name="Send Message" xml:space="preserve">
-    <value>Отправить сообщение</value>
+  <data name="Request ID:" xml:space="preserve">
+    <value>So'rov ID:</value>
   </data>
 </root>

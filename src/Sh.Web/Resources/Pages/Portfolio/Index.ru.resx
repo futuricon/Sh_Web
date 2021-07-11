@@ -120,6 +120,12 @@
   <data name="Completed" xml:space="preserve">
     <value>Выполнен</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>Главная</value>
+  </data>
+  <data name="Portfolio" xml:space="preserve">
+    <value>Портфолио</value>
+  </data>
   <data name="Rating" xml:space="preserve">
     <value>Рейтинг</value>
   </data>

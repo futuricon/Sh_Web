@@ -1,9 +1,11 @@
 ﻿@using Microsoft.AspNetCore.Http.Features
 @inject IViewLocalizer Localizer
 
-@{ var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
+@{ 
+    var consentFeature = Context.Features.Get<ITrackingConsentFeature>();
     var showBanner = !consentFeature?.CanTrack ?? false;
-    var cookieString = consentFeature?.CreateConsentCookie(); }
+    var cookieString = consentFeature?.CreateConsentCookie(); 
+}
 
 @if (showBanner)
 {

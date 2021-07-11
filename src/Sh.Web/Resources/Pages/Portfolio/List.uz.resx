@@ -120,10 +120,16 @@
   <data name="Check My Recent Works" xml:space="preserve">
     <value>Mening so'nggi ishlarimga baho bering</value>
   </data>
+  <data name="Home" xml:space="preserve">
+    <value>Bosh Sahifa</value>
+  </data>
   <data name="Load More" xml:space="preserve">
     <value>Ko'proq</value>
   </data>
   <data name="My Portfolio" xml:space="preserve">
     <value>Mening Portfolio</value>
+  </data>
+  <data name="Portfolio" xml:space="preserve">
+    <value>Portfolio</value>
   </data>
 </root>

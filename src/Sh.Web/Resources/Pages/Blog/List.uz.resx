@@ -117,6 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AuthorFullName" xml:space="preserve">
+    <value>Shaxlo Ergasheva</value>
+  </data>
+  <data name="Blog" xml:space="preserve">
+    <value>Blog</value>
+  </data>
+  <data name="BlogCard" xml:space="preserve">
+    <value>Новостной блог Веб-сайта Шахло</value>
+  </data>
+  <data name="BlogDescription" xml:space="preserve">
+    <value>Шахло Эргашева, Шахло, Эргашева, Блог, Веб-сайт</value>
+  </data>
+  <data name="BlogTitle" xml:space="preserve">
+    <value>Blog - </value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Bosh Sahifa</value>
+  </data>
   <data name="Keyword" xml:space="preserve">
     <value>Kalit so'z</value>
   </data>
