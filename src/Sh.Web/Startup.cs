@@ -57,9 +57,12 @@ namespace Sh.Web
 
             services.AddRazorPages();
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("Portfolio_DB"),
-                new MySqlServerVersion(new Version(8, 0, 11))
-                ).UseLazyLoadingProxies());
+                options.UseSqlServer(Configuration.GetConnectionString("WUCSA_DB"))
+                        .UseLazyLoadingProxies());
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseMySql(Configuration.GetConnectionString("Portfolio_DB"),
+            //    new MySqlServerVersion(new Version(8, 0, 11))
+            //    ).UseLazyLoadingProxies());
 
             services.AddTransient<IEmailService, EmailService>();
             services.AddScoped<IRepository, Repository>();

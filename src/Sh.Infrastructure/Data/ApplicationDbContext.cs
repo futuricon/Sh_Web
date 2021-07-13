@@ -18,15 +18,15 @@ namespace Sh.Infrastructure.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseMySql(
-                "Server = MYSQL5045.site4now.net; Database = db_a75a2f_portfol; Uid = a75a2f_portfol; Pwd = vkdb19962514",
-                new MySqlServerVersion(new Version(8, 0, 11))
-            ).UseLazyLoadingProxies();
-            
             //optionsBuilder.UseMySql(
-            //    "server=localhost;port=3306;user=root;password=root;database=portfolio_db;",
+            //    "Server = MYSQL5045.site4now.net; Database = db_a75a2f_portfol; Uid = a75a2f_portfol; Pwd = vkdb19962514",
             //    new MySqlServerVersion(new Version(8, 0, 11))
             //).UseLazyLoadingProxies();
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Server=wpl44.hosting.reg.ru;Database=u1389318_shakhlo_db;User Id=u1389318_shakhlo_user;Password=vkspeed19962514#; MultipleActiveResultSets=true")
+                    .UseLazyLoadingProxies();
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
