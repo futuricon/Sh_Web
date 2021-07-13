@@ -117,8 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AuthorFullName" xml:space="preserve">
+    <value>Шахло Эргашева</value>
+  </data>
   <data name="Blog" xml:space="preserve">
     <value>Блог</value>
+  </data>
+  <data name="BlogDescription" xml:space="preserve">
+    <value>Блог Шахло Эргашевой, где вы можете прочитать актуальные новости из ее жизни</value>
+  </data>
+  <data name="BlogKeyWords" xml:space="preserve">
+    <value>Шахло Эргашева, Шахло, Шакло, Эргашева, Портфолио, узбекистан, корея, польша, самарканд, Shaxlo, Shahlo, Shakhlo, ergasheva, блог, статья, сообщение, новости</value>
+  </data>
+  <data name="BlogTitle" xml:space="preserve">
+    <value>Мой Блог - Шахло Эргашева</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Главная</value>

@@ -120,11 +120,23 @@
   <data name="all" xml:space="preserve">
     <value>barchasi</value>
   </data>
+  <data name="AuthorFullName" xml:space="preserve">
+    <value>Shahlo Ergasheva</value>
+  </data>
   <data name="Check My Photos &amp; Video" xml:space="preserve">
     <value>Suratlarim va videolarni baholang</value>
   </data>
   <data name="Gallery" xml:space="preserve">
     <value>Galereya</value>
+  </data>
+  <data name="GalleryDescription" xml:space="preserve">
+    <value>Samarqand shahridagi iqtidorli o'quvchi Shaxlo Ergashevaning fotosurat va video galereyasi</value>
+  </data>
+  <data name="GalleryKeyWords" xml:space="preserve">
+    <value>Shahlo Ergasheva, Shakhlo,Shahlo, Shaxlo, Ergasheva, Portfolio, o'zbekiston, koreya, polsha, samarqand, galereya, video, foto, rasm, mediya</value>
+  </data>
+  <data name="GalleryTitle" xml:space="preserve">
+    <value>Mening Galereyam - Shahlo Ergasheva</value>
   </data>
   <data name="Home" xml:space="preserve">
     <value>Bosh Sahifa</value>

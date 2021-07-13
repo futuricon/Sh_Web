@@ -3,7 +3,7 @@
 @model Sh.Web.Pages.Portfolio.IndexModel
 @inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Project";
+    ViewData["Title"] = ViewData["ProjectTitle"];
 }
 
 @section Head {
@@ -13,26 +13,26 @@
         var projectTags = $"{Tag.ConvertTagsToString(Model.Project.Tags)}";
     }
 
-    <meta name="author" content="@Localizer["AuthorFullName"]" />
+    <meta name="author" content="@Localizer["Shakhlo Ergasheva"]" />
     <meta name="description" content="@ViewData["ProjectDesription"]" />
     <meta name="keywords" content="@projectTags" />
     <meta name="image" content="@imgUrl" />
 
     <meta property="og:url" content="@projectUrl" />
-    <meta property="og:type" content="project" />
+    <meta property="og:type" content="article" />
     <meta property="og:title" content="@ViewData["ProjectTitle"]" />
     <meta property="og:site_name" content="Shakhlo's Portfolio" />
     <meta property="og:description" content="@ViewData["ProjectDesription"]" />
     <meta property="og:image" content="@imgUrl" />
 
     <meta property="article:published_time" content="@Model.Project.PostedDate.ToShortDateString()" />
-    <meta property="article:author" content="@Localizer["AuthorFullName"]" />
+    <meta property="article:author" content="@Localizer["Shakhlo Ergasheva"]" />
     <meta property="article:tags" content="@projectTags" />
 
     <meta name="twitter:title" content="@ViewData["ProjectTitle"]" />
     <meta name="twitter:site" content="Shakhlo's Portfolio" />
     <meta name="twitter:description" content="@ViewData["ProjectDesription"]" />
-    <meta name="twitter:creator" content="@Localizer["AuthorFullName"]" />
+    <meta name="twitter:creator" content="@Localizer["Shakhlo Ergasheva"]" />
     <meta name="twitter:image" content="@imgUrl" />
 }
 

@@ -120,6 +120,9 @@
   <data name="About me" xml:space="preserve">
     <value>Men haqimda</value>
   </data>
+  <data name="AuthorFullName" xml:space="preserve">
+    <value>Shahlo Ergasheva</value>
+  </data>
   <data name="Check My Recent &lt;br&gt; Works" xml:space="preserve">
     <value>Mening so'nggi &lt;br&gt; ishlarim</value>
   </data>
@@ -131,6 +134,15 @@
   </data>
   <data name="I am Shakhlo" xml:space="preserve">
     <value>Men Shahlo</value>
+  </data>
+  <data name="IndexDescription" xml:space="preserve">
+    <value>Samarqandlik iqtidorli o'quvchi Shaxlo Ergashevaning rasmiy veb-sayti</value>
+  </data>
+  <data name="IndexKeyWords" xml:space="preserve">
+    <value>Shahlo Ergasheva, Shakhlo,Shahlo, Shaxlo, Ergasheva, Portfolio, o'zbekiston, koreya, polsha, samarqand</value>
+  </data>
+  <data name="IndexTitle" xml:space="preserve">
+    <value>Shahlo Ergasheva</value>
   </data>
   <data name="Latest Posts From &lt;br&gt; My Blog" xml:space="preserve">
     <value>Blogimdagi &lt;br&gt; so'nggi xabarlar</value>

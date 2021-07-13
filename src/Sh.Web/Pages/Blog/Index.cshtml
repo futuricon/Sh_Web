@@ -3,7 +3,7 @@
 @model Sh.Web.Pages.Blog.IndexModel
 @inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = ViewData["BlogTitle"];
 }
 
 @section Head {
@@ -13,7 +13,7 @@
         var articleTags = $"{Tag.ConvertTagsToString(Model.Blog.Tags)}";
     }
 
-    <meta name="author" content="@Localizer["AuthorFullName"]" />
+    <meta name="author" content="@Localizer["Shakhlo Ergasheva"]" />
     <meta name="description" content="@ViewData["BlogDesription"]" />
     <meta name="keywords" content="@articleTags" />
     <meta name="image" content="@imgUrl" />
@@ -26,13 +26,13 @@
     <meta property="og:image" content="@imgUrl" />
 
     <meta property="article:published_time" content="@Model.Blog.PostedDate.ToShortDateString()" />
-    <meta property="article:author" content="@Localizer["AuthorFullName"]" />
+    <meta property="article:author" content="@Localizer["Shakhlo Ergasheva"]" />
     <meta property="article:tags" content="@articleTags" />
 
     <meta name="twitter:title" content="@ViewData["BlogTitle"]" />
     <meta name="twitter:site" content="WUCSA Blog" />
     <meta name="twitter:description" content="@ViewData["BlogDesription"]" />
-    <meta name="twitter:creator" content="@Localizer["AuthorFullName"]" />
+    <meta name="twitter:creator" content="@Localizer["Shakhlo Ergasheva"]" />
     <meta name="twitter:image" content="@imgUrl" />
 }
 

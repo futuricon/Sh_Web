@@ -123,6 +123,18 @@
   <data name="About Me" xml:space="preserve">
     <value>Men haqimda</value>
   </data>
+  <data name="AboutDescription" xml:space="preserve">
+    <value>Samarqandlik iqtidorli o'quvchi Shahlo Ergasheva haqida ma'lumot</value>
+  </data>
+  <data name="AboutKeyWords" xml:space="preserve">
+    <value>Shahlo Ergasheva, Shahlo, Shaxlo, Ergasheva, Portfolio, uzbekiston, koreya, polsha, samarqand, Men haqimda, ma'lumot</value>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>Men Haqimda - Shahlo Ergasheva</value>
+  </data>
+  <data name="AuthorFullName" xml:space="preserve">
+    <value>Shahlo Ergasheva</value>
+  </data>
   <data name="Download CV" xml:space="preserve">
     <value>CV-ni yuklab oling</value>
   </data>

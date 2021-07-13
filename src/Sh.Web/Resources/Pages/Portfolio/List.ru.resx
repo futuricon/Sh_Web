@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AuthorFullName" xml:space="preserve">
+    <value>Шахло Эргашева</value>
+  </data>
   <data name="Check My Recent Works" xml:space="preserve">
     <value>Оцените мои последние работы</value>
   </data>
@@ -131,5 +134,14 @@
   </data>
   <data name="Portfolio" xml:space="preserve">
     <value>Портфолио</value>
+  </data>
+  <data name="PortfolioDescription" xml:space="preserve">
+    <value>Портфолио с проектами Шахло Эргашевой, талантливой ученицы из Самарканда</value>
+  </data>
+  <data name="PortfolioKeyWords" xml:space="preserve">
+    <value>Шахло Эргашева, Шахло, Шакло, Эргашева, Портфолио, узбекистан, корея, польша, самарканд, Shaxlo, Shahlo, Shakhlo, ergasheva, Обо мне, Информация</value>
+  </data>
+  <data name="PortfolioTitle" xml:space="preserve">
+    <value>Мое Портфолио - Шахло Эргашева</value>
   </data>
 </root>

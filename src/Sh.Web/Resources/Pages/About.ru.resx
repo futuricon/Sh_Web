@@ -123,6 +123,18 @@
   <data name="About Me" xml:space="preserve">
     <value>Обо мне</value>
   </data>
+  <data name="AboutDescription" xml:space="preserve">
+    <value>Информация о Шахло Эргашевой, талантливой ученице из Самарканда.</value>
+  </data>
+  <data name="AboutKeyWords" xml:space="preserve">
+    <value>Шахло Эргашева, Шахло, Шакло, Эргашева, Портфолио, узбекистан, корея, польша, самарканд, Shaxlo, Shahlo, Shakhlo, ergasheva, Обо мне, Информация</value>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>Обо Мне - Шахло Эргашева</value>
+  </data>
+  <data name="AuthorFullName" xml:space="preserve">
+    <value>Шахло Эргашева</value>
+  </data>
   <data name="Download CV" xml:space="preserve">
     <value>Скачать резюме</value>
   </data>

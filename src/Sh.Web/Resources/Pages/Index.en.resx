@@ -117,34 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="About" xml:space="preserve">
-    <value>Men Haqimda</value>
+  <data name="AuthorFullName" xml:space="preserve">
+    <value>Shakhlo Ergasheva</value>
   </data>
-  <data name="An error occurred while processing your request" xml:space="preserve">
-    <value>Sizning so'rovingizni ko'rib chiqishda xatolik yuz berdi</value>
+  <data name="IndexDescription" xml:space="preserve">
+    <value>Official web-site of Shakhlo Ergasheva, talented pupil from Samarkand</value>
   </data>
-  <data name="Blog" xml:space="preserve">
-    <value>Blog</value>
+  <data name="IndexKeyWords" xml:space="preserve">
+    <value>Shakhlo Ergasheva, Shakhlo, Shaxlo, Ergasheva, Portfolio, uzbekistan, korea, poland, samarkand</value>
   </data>
-  <data name="Contacts" xml:space="preserve">
-    <value>Kontaktlar</value>
-  </data>
-  <data name="Empty" xml:space="preserve">
-    <value>Bo'sh</value>
-  </data>
-  <data name="Error" xml:space="preserve">
-    <value>Xato</value>
-  </data>
-  <data name="Gallery" xml:space="preserve">
-    <value>Galereya</value>
-  </data>
-  <data name="Home" xml:space="preserve">
-    <value>Bosh Sahifa</value>
-  </data>
-  <data name="Portfolio" xml:space="preserve">
-    <value>Portfolio</value>
-  </data>
-  <data name="Request ID:" xml:space="preserve">
-    <value>So'rov ID:</value>
+  <data name="IndexTitle" xml:space="preserve">
+    <value>Shakhlo Ergasheva</value>
   </data>
 </root>

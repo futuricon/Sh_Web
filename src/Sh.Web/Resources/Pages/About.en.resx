@@ -117,52 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="About me" xml:space="preserve">
-    <value>Обо мне</value>
+  <data name="AboutDescription" xml:space="preserve">
+    <value>Information about Shakhlo Ergasheva, talented pupil from Samarkand</value>
+  </data>
+  <data name="AboutKeyWords" xml:space="preserve">
+    <value>Shakhlo Ergasheva, Shakhlo, Shaxlo, Ergasheva, Portfolio, uzbekistan, korea, poland, samarkand, about, me, info</value>
+  </data>
+  <data name="AboutTitle" xml:space="preserve">
+    <value>About Me - Shakhlo Ergasheva</value>
   </data>
   <data name="AuthorFullName" xml:space="preserve">
-    <value>Шахло Эргашева</value>
-  </data>
-  <data name="Check My Recent &lt;br&gt; Works" xml:space="preserve">
-    <value>Мои последние &lt;br&gt; Работы</value>
-  </data>
-  <data name="Hi There" xml:space="preserve">
-    <value>Всем привет</value>
-  </data>
-  <data name="Honourable Mentors Says &lt;br&gt; About Me" xml:space="preserve">
-    <value>Уважаемые наставники говорят &lt;br&gt; Обо мне</value>
-  </data>
-  <data name="I am Shakhlo" xml:space="preserve">
-    <value>Я Шахло</value>
-  </data>
-  <data name="IndexDescription" xml:space="preserve">
-    <value>Официальный сайт Шахло Эргашевой, талантливой ученицы из Самарканда</value>
-  </data>
-  <data name="IndexKeyWords" xml:space="preserve">
-    <value>Шахло Эргашева, Шахло, Шакло, Эргашева, Портфолио, узбекистан, корея, польша, самарканд, Shaxlo, Shahlo, Shakhlo, ergasheva</value>
-  </data>
-  <data name="IndexTitle" xml:space="preserve">
-    <value>Шахло Эргашева</value>
-  </data>
-  <data name="Latest Posts From &lt;br&gt; My Blog" xml:space="preserve">
-    <value>Последние публикации из &lt;br&gt; Моего блога</value>
-  </data>
-  <data name="Learn More" xml:space="preserve">
-    <value>Подробнее</value>
-  </data>
-  <data name="My blog" xml:space="preserve">
-    <value>Мой блог</value>
-  </data>
-  <data name="My Portfolio" xml:space="preserve">
-    <value>Мое Портфолио</value>
-  </data>
-  <data name="My Testimonials" xml:space="preserve">
-    <value>Мои отзывы</value>
-  </data>
-  <data name="Read More" xml:space="preserve">
-    <value>Подробнее</value>
-  </data>
-  <data name="See My Works" xml:space="preserve">
-    <value>Мои работы</value>
+    <value>Shakhlo Ergasheva</value>
   </data>
 </root>

@@ -2,8 +2,9 @@
 @model Sh.Web.Pages.ContactModel
 @inject IViewLocalizer Localizer
 @{
-    ViewData["Title"] = "Contacts";
+    ViewData["Title"] = Localizer["Contacts"];
 }
+
 @section CSS{
     <link rel="stylesheet" href="~/css/contact_style.css" />
 }
