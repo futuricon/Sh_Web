@@ -69,14 +69,14 @@ namespace Sh.Web.Pages.Portfolio
 
             if (Input.UploadCoverPhoto != null && Input.UploadCoverPhoto.Length > 0)
             {
-                _imageHelper.RemoveImage(project.CoverPhotoPath, "post_imgs");
-                project.CoverPhotoPath = await _imageHelper.UploadImageAsync(Input.UploadCoverPhoto, $"{Input.Project.Id}_blog_cover", "post_imgs");
+                _imageHelper.RemoveImage(project.CoverPhotoPath, "project_imgs");
+                project.CoverPhotoPath = await _imageHelper.UploadImageAsync(Input.UploadCoverPhoto, $"{Input.Project.Id}_project_cover", "project_imgs");
             }
 
             await _portfolioRepository.UpdateTagsAsync(project, tags);
             await _portfolioRepository.UpdateProjectAsync(project);
 
-            return RedirectToPage("/Project/Index", new { slug = project.Slug });
+            return RedirectToPage("./Index", new { slug = project.Slug });
         }
     }
 }

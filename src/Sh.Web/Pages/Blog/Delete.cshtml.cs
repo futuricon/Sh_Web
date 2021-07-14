@@ -58,7 +58,7 @@ namespace Sh.Web.Pages.Blog
                 _imageHelper.RemoveImage(Blog.CoverPhotoPath, "post_imgs");
             }
 
-            return RedirectToPage("/Blog/List");
+            return RedirectToPage("./List");
         }
     }
 }

@@ -56,6 +56,8 @@ namespace Sh.Infrastructure.Repositories
 
         public async Task UpdateTagsAsync(Project project, params Tag[] tags)
         {
+            var toRemove = project.Tags.Where(l2 => !tags.Any(l1 => l1.Name.ToLower() == l2.Name.ToLower())).ToList();
+
             foreach (var tag in tags)
             {
                 var originTag = await GetAsync<Tag>(i => i.Name.ToLower() == tag.Name.ToLower());
@@ -72,6 +74,14 @@ namespace Sh.Infrastructure.Repositories
                 }
 
                 project.Tags.Add(originTag);
+            }
+            foreach (var tag in toRemove)
+            {
+                project.Tags.Remove(tag);
+                if (tag.Projects.Count == 0 && tag.Blogs.Count == 0)
+                {
+                    _context.Remove<Tag>(tag);
+                }
             }
 
             await UpdateAsync(project);

@@ -76,7 +76,7 @@ namespace Sh.Web.Pages.Blog
             await _blogRepository.UpdateTagsAsync(blog, tags);
             await _blogRepository.UpdateBlogAsync(blog);
 
-            return RedirectToPage("/Blog/Index", new { slug = blog.Slug });
+            return RedirectToPage("./Index", new { slug = blog.Slug });
         }
     }
 }

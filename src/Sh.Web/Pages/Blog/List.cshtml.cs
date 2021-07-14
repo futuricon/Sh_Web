@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -34,11 +33,11 @@ namespace Sh.Web.Pages.Blog
 
             if (!string.IsNullOrEmpty(SearchString))
             {
-                blogs = blogs.Where(s => s.Title.Contains(SearchString) ||
-                s.TitleRu.Contains(SearchString) || s.TitleUz.Contains(SearchString) ||
-                s.Tags.Where(x => x.Name.Contains(SearchString)).Any());
-                ViewData["CurrentFilter"] = SearchString;
-                Blogs = PaginatedList<Domain.Entities.BlogModel.Blog>.Create(blogs.OrderByDescending(i => i.PostedDate), pageIndex, 6);
+                blogs = blogs.Where(s => s.Title.Contains(SearchString.ToLower()) ||
+                s.TitleRu.Contains(SearchString.ToLower()) || s.TitleUz.Contains(SearchString.ToLower()) ||
+                s.Tags.Where(x => x.Name.Contains(SearchString.ToLower())).Any());
+                ViewData["CurrentFilter"] = SearchString.ToLower();
+                Blogs = PaginatedList<Domain.Entities.BlogModel.Blog>.Create(blogs.OrderByDescending(i => i.PostedDate), pageIndex, 30);
             }
             else if (tag != null)
             {
@@ -49,7 +48,7 @@ namespace Sh.Web.Pages.Blog
             {
                 Blogs = PaginatedList<Domain.Entities.BlogModel.Blog>.Create(blogs.OrderByDescending(i => i.PostedDate), pageIndex, 6);
             }
-
+            
             PopularArticles = blogs.OrderByDescending(i => i.ViewCount).Take(4).ToArray();
             PopularTags = await GetPopularTagsAsync(blogs);
             return Page();

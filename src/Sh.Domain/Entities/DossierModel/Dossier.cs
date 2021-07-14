@@ -66,17 +66,17 @@ namespace Sh.Domain.Entities.DossierModel
         public string PositionUz { get; set; }
 
         [Required(ErrorMessage = "Please enter a testimonial description")]
-        [StringLength(200, ErrorMessage = "Characters must be less than 200")]
+        [StringLength(800, ErrorMessage = "Characters must be less than 800")]
         [Display(Name = "Description")]
         public string Description { get; set; }
 
         [Required(ErrorMessage = "Пожалуйста, введите описание характеристики")]
-        [StringLength(200, ErrorMessage = "Символов должно быть меньше 200")]
+        [StringLength(800, ErrorMessage = "Символов должно быть меньше 800")]
         [Display(Name = "Описание")]
         public string DescriptionRu { get; set; }
 
         [Required(ErrorMessage = "Iltimos, xususiyatning tavsifini kiriting")]
-        [StringLength(200, ErrorMessage = "Belgilar 200 dan kam bo'lishi kerak")]
+        [StringLength(800, ErrorMessage = "Belgilar 800 dan kam bo'lishi kerak")]
         [Display(Name = "Tavsif")]
         public string DescriptionUz { get; set; }
 

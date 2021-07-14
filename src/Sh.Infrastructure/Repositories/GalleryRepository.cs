@@ -31,10 +31,12 @@ namespace Sh.Infrastructure.Repositories
             return UpdateAsync(media);
         }
 
-        //////////////// Tag ////////////////
+        //////////////// Category ////////////////
 
         public async Task UpdateCategoriesAsync(Media media, params Category[] categories)
         {
+            var toRemove = media.Categories.Where(l2 =>!categories.Any(l1 => l1.Name.ToLower() == l2.Name.ToLower())).ToList();
+            
             foreach (var category in categories)
             {
                 var originCategory = await GetAsync<Category>(i => i.Name.ToLower() == category.Name.ToLower());
@@ -51,6 +53,14 @@ namespace Sh.Infrastructure.Repositories
                 }
 
                 media.Categories.Add(originCategory);
+            }
+            foreach (var category in toRemove)
+            {
+                media.Categories.Remove(category);
+                if (category.Medias.Count == 0)
+                {
+                    _context.Remove<Category>(category);
+                }
             }
 
             await UpdateAsync(media);

@@ -39,29 +39,30 @@ namespace Sh.Infrastructure.Data
             builder.Entity<IdentityUserLogin<string>>(entity => { entity.ToTable("UserLogins"); });
             builder.Entity<IdentityUserToken<string>>(entity => { entity.ToTable("UserToken"); });
             builder.Entity<IdentityRoleClaim<string>>(entity => { entity.ToTable("RoleClaims"); });
-            builder.Entity<Dossier>().HasData(
-                new Dossier
-                {
-                    FirstName = "Shakhlo",
-                    FirstNameRu = "Шахло",
-                    FirstNameUz = "Shaxlo",
-                    LastName = "Ergasheva",
-                    LastNameRu = "Эргашева",
-                    LastNameUz = "Ergasheva",
-                    Position = "Pupil",
-                    PositionRu = "Ученица",
-                    PositionUz = "O'quvchi",
-                    Description = "test",
-                    DescriptionRu = "тест",
-                    DescriptionUz = "test",
-                    CoverPhotoPath = "",
-                    Address = "some address",
-                    PhoneNumber = "+998908007060",
-                    Email = "test@mail.com",
-                    CVFilePath = "",
-                    IsAboutInfo = true
-                }
-            );
+            builder.Entity<Dossier>();
+            //builder.Entity<Dossier>().HasData(
+            //    new Dossier
+            //    {
+            //        FirstName = "Shakhlo",
+            //        FirstNameRu = "Шахло",
+            //        FirstNameUz = "Shahlo",
+            //        LastName = "Ergasheva",
+            //        LastNameRu = "Эргашева",
+            //        LastNameUz = "Ergasheva",
+            //        Position = "Pupil",
+            //        PositionRu = "Ученица",
+            //        PositionUz = "O'quvchi",
+            //        Description = "test",
+            //        DescriptionRu = "тест",
+            //        DescriptionUz = "test",
+            //        CoverPhotoPath = "",
+            //        Address = "some address",
+            //        PhoneNumber = "+998908007060",
+            //        Email = "test@mail.com",
+            //        CVFilePath = "",
+            //        IsAboutInfo = true
+            //    }
+            //);
             builder.Entity<Tag>(entity =>
             {
                 entity.HasMany(m => m.Blogs)

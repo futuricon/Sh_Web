@@ -89,7 +89,7 @@ namespace Sh.Web.Pages.Gallery
             }
 
             await _galleryRepository.UpdateCategoriesAsync(media, categories);
-            return RedirectToPage("/Gallery/List");
+            return RedirectToPage("./List");
         }
     }
 }

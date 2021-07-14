@@ -60,18 +60,22 @@
     <div class="container">
         <div class="row">
             <div class="offset-xl-1 col-xl-10">
+                @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
+                {
+                    <ul class="action_list mb-15">
+                        <li>
+                            <a class="action_btn rounded-0 primary-bg text-white mb-15" asp-page="/Portfolio/Edit" asp-route-id="@Model.Project.Id"><i class="fas fa-pen"></i>&nbsp;&nbsp;@Localizer["Edit this Project"]</a>
+                        </li>
+                        <li>
+                            <a class="action_btn rounded-0 primary-bg text-white mb-15" asp-page="/Portfolio/Delete" asp-route-id="@Model.Project.Id"><i class="fas fa-trash"></i>&nbsp;&nbsp;@Localizer["Delete this Project"]</a>
+                        </li>
+                    </ul>
+                }
                 <div class="portfolio_details_inner">
                     <div class="row">
                         <div class="col-12">
                             <div class="left_img">
-                                @if (!string.IsNullOrEmpty(Model.Project.CoverPhotoPath))
-                                {
-                                    <img class="img-fluid" src="@Model.Project.CoverPhotoPath" alt="@Model.Project.Title">
-                                }
-                                else
-                                {
-                                    <img class="img-fluid" src="~/img/blog_image.png" alt="Project Cover Image">
-                                }
+                                <img class="img-fluid" src="@Model.Project.CoverPhotoPath" alt="@Model.Project.Title">
                             </div>
                         </div>
                     </div>
