@@ -36,10 +36,7 @@ namespace Sh.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddRazorPages(options => {
-            //    options.Conventions.Add(new CultureTemplatePageRouteModelConvention());
-            //});
-
+            
             services.Configure<RequestLocalizationOptions>(options =>
             {
                 var supportedCultures = new[]
