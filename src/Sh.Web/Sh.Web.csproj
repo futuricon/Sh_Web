@@ -5,13 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="wwwroot\img\banner\**" />
-    <Content Remove="wwwroot\img\banner\**" />
-    <EmbeddedResource Remove="wwwroot\img\banner\**" />
-    <None Remove="wwwroot\img\banner\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="ViewComponents\CultureAnchorTagHelper.cs" />
   </ItemGroup>
 
