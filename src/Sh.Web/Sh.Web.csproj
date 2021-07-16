@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\img\banner\**" />
+    <Content Remove="wwwroot\img\banner\**" />
+    <EmbeddedResource Remove="wwwroot\img\banner\**" />
+    <None Remove="wwwroot\img\banner\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="ViewComponents\CultureAnchorTagHelper.cs" />
   </ItemGroup>
 
@@ -30,7 +37,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\img\banner\" />
     <Folder Include="wwwroot\img\dossier_imgs\" />
     <Folder Include="wwwroot\img\post_imgs\" />    
     <Folder Include="wwwroot\img\gallery_imgs\" />    

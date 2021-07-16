@@ -32,6 +32,12 @@ bld/
 [Oo]ut/
 [Ll]og/
 [Ll]ogs/
+[Dd]ossier_imgs/
+[Gg]allery_imgs/
+[Pp]ost_imgs/
+[Pp]roject_imgs/
+[Tt]estimonials/
+[Pp]dfFiles/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
