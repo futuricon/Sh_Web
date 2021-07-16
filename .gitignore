@@ -9,12 +9,13 @@
 *.user
 *.userosscache
 *.sln.docstates
-dossier_imgs/
-gallery_imgs/
-post_imgs/
-project_imgs/
-testimonials/
-pdfFiles/
+
+dossier_imgs/*
+gallery_imgs/*
+post_imgs/*
+project_imgs/*
+testimonials/*
+pdfFiles/*
 
 appsettings.json
 appsettings.Development.json
