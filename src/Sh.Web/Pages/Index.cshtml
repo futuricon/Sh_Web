@@ -60,9 +60,9 @@
                             }
                         </h5>
                         <div class="social_icons my-5">
-                            <a href="#"><i class="lni lni-youtube"></i></a>
-                            <a href="#"><i class="lni lni-instagram-original"></i></a>
-                            <a href="#"><i class="lni lni-telegram-original"></i></a>
+                            <a href="https://www.youtube.com/channel/UCl6M2FuqC-GBWu-EXb001iA"><i class="fab fa-youtube"></i></a>
+                            <a href="https://www.instagram.com/shakhlo.uz/"><i class="fab fa-instagram"></i></a>
+                            <a href="https://t.me/shakhlo_uz"><i class="fab fa-telegram-plane"></i></a>
                         </div>
                         <a class="primary_btn" asp-page="/Portfolio/List"><span>@Localizer["See My Works"]</span></a>
                     </div>
@@ -220,8 +220,12 @@
                                 </div>
                             </a>
                         </div>
+                        {
+                            counter++;
+                            continue;
+                        }
                     }
-                    { counter++; }
+
 
                     <div class="col-lg-3 col-md-6 all">
                         <a asp-page="/Portfolio/Index" asp-route-slug="@project.Slug">

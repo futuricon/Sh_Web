@@ -23,14 +23,14 @@ namespace Sh.Web.Pages.Portfolio
         public async Task OnGetAsync()
         {
             RCName = HttpContext.Features.Get<IRequestCultureFeature>().RequestCulture.UICulture.Name;
-            Projects = (await _portfolioRepository.GetListAsync<Project>()).Take(10).OrderByDescending(i => i.PostedDate).ToList();
+            Projects = (await _portfolioRepository.GetListAsync<Project>()).OrderByDescending(i => i.PostedDate).Take(10).ToList();
 
             ViewData["Amount"] = Projects.Count;
         }
 
         public async Task<IActionResult> OnPostProjectAsync(int amount)
         {
-            var projectList = (await _portfolioRepository.GetListAsync<Project>()).Skip(amount).Take(5).OrderByDescending(i => i.PostedDate).ToList();
+            var projectList = (await _portfolioRepository.GetListAsync<Project>()).OrderByDescending(i => i.PostedDate).Skip(amount).Take(5).ToList();
 
             if (projectList == null || projectList.Count == 0)
             {

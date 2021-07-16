@@ -217,7 +217,9 @@
                     if ($("#amount_img").val()%5 != 0) {
                         enough = false;
                     }
+                    
                     for (let i = 0; i < result.length; i++) {
+                        
                         if (result[i].mediaType === 1) {
                             var $newItems = $(
                                 `<div class="col-lg-4 col-md-6 all photo ${result[i].categories[0].name}">
@@ -251,6 +253,9 @@
                         $('.gallery-grid').isotope('insert', $newItems);
                         lightbox.reload();
                     }
+                     setTimeout(function () {
+                         $('.gallery-grid').isotope('reloadItems').isotope();
+                     }, 50);
                 },
                 complete: function () {
                     if (enough) {

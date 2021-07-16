@@ -134,7 +134,7 @@
     <script src="~/vendors/isotope/imagesloaded.pkgd.min.js"></script>
     <script src="~/vendors/isotope/isotope-min.js"></script>
     <script>
-        var culture = @Model.RCName.ToLower();
+        var culture = '@Model.RCName.ToLower()';
         /* ---------------------------------------------
             Isotope js Starts
          --------------------------------------------- */
@@ -222,6 +222,9 @@
                         }
                         $('.gallery-grid').isotope('insert', $newItem);
                     }
+                    setTimeout(function () {
+                        $('.gallery-grid').isotope('reloadItems').isotope();
+                    }, 50);
                 }
             });
             $("#more_btn").show();

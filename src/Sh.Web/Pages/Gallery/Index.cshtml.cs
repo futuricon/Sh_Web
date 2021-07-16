@@ -21,7 +21,7 @@ namespace Sh.Web.Pages.Gallery
 
         public async Task<IActionResult> OnGetAsync()
         {
-            Medias = (await _galleryRepository.GetListAsync<Media>()).Take(10).OrderByDescending(i=>i.PostedDate).ToList();
+            Medias = (await _galleryRepository.GetListAsync<Media>()).OrderByDescending(i=>i.PostedDate).Take(10).ToList();
 
             ViewData["Amount"] = Medias.Count;
 
@@ -30,7 +30,7 @@ namespace Sh.Web.Pages.Gallery
 
         public async Task<IActionResult> OnPostMediaAsync(int amount)
         {
-            var mediaList = (await _galleryRepository.GetListAsync<Media>()).Skip(amount).Take(5).OrderByDescending(i => i.PostedDate).ToList();
+            var mediaList = (await _galleryRepository.GetListAsync<Media>()).OrderByDescending(i => i.PostedDate).Skip(amount).Take(5).ToList();
 
             if (mediaList == null || mediaList.Count == 0)
             {
